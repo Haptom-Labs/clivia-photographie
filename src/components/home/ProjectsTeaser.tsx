@@ -1,9 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Projet } from "../../data/projets";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   projets: Projet[];
@@ -16,24 +13,9 @@ export default function ProjectsTeaser({ projets }: Props) {
     const ctx = gsap.context(() => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const cards = ref.current?.querySelectorAll<HTMLAnchorElement>("[data-card]");
-      cards?.forEach((card, idx) => {
-        gsap.from(card, {
-          y: 40,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power2.out",
-          delay: idx * 0.06,
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        });
-
+      cards?.forEach((card) => {
         const img = card.querySelector("img");
         if (!img) return;
-
         card.addEventListener("pointerenter", () => {
           gsap.to(img, { scale: 1.04, duration: 0.9, ease: "power3.out" });
         });
@@ -113,7 +95,7 @@ export default function ProjectsTeaser({ projets }: Props) {
                 <img
                   src={p.cover}
                   alt={`${p.title} — ${p.locations.join(", ")}`}
-                  loading={idx === 0 ? "eager" : "lazy"}
+                  loading="eager"
                   decoding="async"
                   fetchPriority={idx === 0 ? "high" : "auto"}
                   className="absolute inset-0 h-full w-full object-cover will-change-transform"
