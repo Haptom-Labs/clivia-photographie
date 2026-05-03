@@ -59,3 +59,7 @@ export function projetsByLocationSlug(slug: string): Projet[] {
     p.series.some((s) => (SLUG_BY_NAME[s.location] ?? s.slug) === slug),
   );
 }
+
+export function seriesForLocation(p: Projet, slug: string) {
+  return p.series.filter((s) => (SLUG_BY_NAME[s.location] ?? s.slug) === slug);
+}

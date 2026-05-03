@@ -53,6 +53,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <ClientRouter />
+
+    <script is:inline>
+      // Force scroll-to-top on Astro view transitions (default keeps prev scroll position)
+      document.addEventListener("astro:after-swap", () => {
+        if (window.__lenis) {
+          window.__lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        }
+      });
+    </script>
   </head>
 
   <body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-ink)]">

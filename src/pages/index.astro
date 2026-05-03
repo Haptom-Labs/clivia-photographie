@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroFullBleed from "../components/sections/HeroFullBleed.tsx";
 import SplitScreen from "../components/sections/SplitScreen.astro";
-import AsymGrid from "../components/sections/AsymGrid.astro";
 import ProjectsTeaser from "../components/home/ProjectsTeaser.tsx";
 import LocationsStrip from "../components/home/LocationsStrip.tsx";
 import CarnetVoyageTeaser from "../components/home/CarnetVoyageTeaser.tsx";
@@ -17,13 +16,11 @@ const carnetSeries = carnetVoyage?.series.map((s) => ({
 
 const heroImage = heroCandidates[1] ?? heroCandidates[0] ?? projets[0]?.cover;
 const locations = buildLocationCards();
-const introImage = projets[1]?.images[2] ?? projets[0]?.images[1];
+// Image hero du SplitScreen "Donner à voir un projet" — choisie manuellement (premium)
+const introImage = "/images/intro/agence-dame-mirror.jpg";
 const ctaImage =
   projets[0]?.images[Math.min(20, projets[0].images.length - 1)] ??
   projets[0]?.cover;
-const filmGrid = projets
-  .flatMap((p) => p.images.slice(2, 4))
-  .slice(0, 4);
 ---
 
 <BaseLayout
@@ -65,30 +62,15 @@ const filmGrid = projets
   <SplitScreen
     image={introImage}
     alt="Détail architectural"
-    imagePosition="left"
-    ratio="4/5"
+    layout="overlay"
     variant="parallax"
     eyebrow="— Approche"
     title="Donner à voir un projet, pas seulement le documenter."
     body="Travailler comme un architecte — comprendre l'intention, choisir le moment, tenir le cadre. Chaque reportage est pensé pour vivre dans la presse, sur votre site, dans vos books, et durer."
     meta="Bordeaux · Gironde · France"
-    contentBg="warm"
   />
 
   <ProjectsTeaser client:visible projets={projets} />
-
-  <AsymGrid
-    images={filmGrid}
-    variant="duo"
-    altPrefix="Sélection"
-    startIndex={0}
-  />
-  <AsymGrid
-    images={filmGrid}
-    variant="60-40"
-    altPrefix="Sélection"
-    startIndex={2}
-  />
 
   <LocationsStrip client:visible locations={locations} />
 

@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface Location {
   name: string;
+  slug: string;
   image: string;
   count: number;
 }
@@ -45,8 +46,6 @@ export default function LocationsStrip({ locations }: Props) {
         );
       });
 
-      if (window.innerWidth < 768) return;
-
       const distance = track.scrollWidth - window.innerWidth + 80;
       if (distance <= 0) return;
 
@@ -55,7 +54,7 @@ export default function LocationsStrip({ locations }: Props) {
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          start: "top top",
+          start: "bottom bottom",
           end: () => `+=${distance}`,
           pin: true,
           scrub: 0.6,
@@ -69,6 +68,7 @@ export default function LocationsStrip({ locations }: Props) {
   return (
     <section
       ref={sectionRef}
+      id="territoires"
       className="relative overflow-hidden bg-[var(--color-bg-warm)] py-14 md:py-28"
     >
       <div className="mx-auto mb-8 flex max-w-[var(--container-wide)] flex-col gap-3 px-6 md:mb-16 md:px-10">
@@ -80,33 +80,33 @@ export default function LocationsStrip({ locations }: Props) {
 
       <div
         ref={trackRef}
-        className="flex gap-5 overflow-x-auto px-5 w-full [scroll-snap-type:x_mandatory] [-webkit-overflow-scrolling:touch] md:w-max md:gap-10 md:overflow-visible md:px-10 md:will-change-transform [&::-webkit-scrollbar]:hidden"
-        style={{ scrollbarWidth: "none" }}
+        className="flex w-max gap-5 px-5 will-change-transform md:gap-10 md:px-10"
       >
         {locations.map((loc) => (
-          <div
-            key={loc.name}
+          <a
+            key={loc.slug}
+            href={`/lieux/${loc.slug}`}
             data-loc-item
-            data-cursor="media"
-            className="relative shrink-0 overflow-hidden bg-[var(--color-ink)] [scroll-snap-align:start] md:[scroll-snap-align:none]"
-            style={{ width: "min(82vw, 540px)", aspectRatio: "3 / 4" }}
+            data-cursor="link"
+            className="group relative shrink-0 overflow-hidden bg-[var(--color-ink)]"
+            style={{ width: "min(78vw, 540px)", aspectRatio: "3 / 4" }}
           >
             <img
               src={loc.image}
               alt={loc.name}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,14,12,0.6)] to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-[var(--color-bg)] md:p-8">
               <p className="eyebrow opacity-80" style={{ color: "var(--color-bg)" }}>
                 {loc.count} reportages
               </p>
-              <h3 className="mt-2 font-display text-3xl leading-tight md:text-4xl">
+              <h3 className="mt-3 font-display text-3xl leading-tight transition-colors group-hover:text-[var(--color-accent)] md:text-4xl">
                 {loc.name}
               </h3>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </section>

@@ -117,24 +117,61 @@ export default function HeroFullBleed({
         )}
       </div>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 z-20 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-3 opacity-60">
-          <span className="eyebrow text-[0.6rem]" style={{ color: "var(--color-bg)" }}>
-            scroll
-          </span>
-          <span
-            className="block h-10 w-px animate-[scrollIndicator_2.4s_ease-in-out_infinite] bg-[var(--color-bg)]"
-            style={{ transformOrigin: "top" }}
+      <div className="pointer-events-none absolute bottom-3 left-1/2 z-20 -translate-x-1/2">
+        <svg
+          width="10"
+          height="40"
+          viewBox="0 0 10 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          style={{ color: "var(--color-bg)" }}
+          className="opacity-45"
+        >
+          <path
+            d="M5 1 V31"
+            stroke="currentColor"
+            strokeWidth="0.8"
+            strokeLinecap="round"
+            pathLength={100}
+            style={{
+              strokeDasharray: 100,
+              strokeDashoffset: 100,
+              animation: "drawHeroLine 3.6s cubic-bezier(0.6,0.05,0.3,1) infinite",
+            }}
           />
-        </div>
+          <path
+            d="M1.5 28 L5 31.5 L8.5 28"
+            stroke="currentColor"
+            strokeWidth="0.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            pathLength={100}
+            style={{
+              strokeDasharray: 100,
+              strokeDashoffset: 100,
+              animation: "drawHeroArrow 3.6s cubic-bezier(0.6,0.05,0.3,1) infinite",
+            }}
+          />
+        </svg>
       </div>
 
       <style>{`
-        @keyframes scrollIndicator {
-          0% { transform: scaleY(0); transform-origin: top; }
-          50% { transform: scaleY(1); transform-origin: top; }
-          51% { transform: scaleY(1); transform-origin: bottom; }
-          100% { transform: scaleY(0); transform-origin: bottom; }
+        @keyframes drawHeroLine {
+          0%   { stroke-dashoffset: 100; opacity: 0; }
+          8%   { opacity: 1; }
+          40%  { stroke-dashoffset: 0; opacity: 1; }
+          80%  { stroke-dashoffset: 0; opacity: 1; }
+          92%  { opacity: 0; }
+          100% { stroke-dashoffset: 100; opacity: 0; }
+        }
+        @keyframes drawHeroArrow {
+          0%   { stroke-dashoffset: 100; opacity: 0; }
+          40%  { stroke-dashoffset: 100; opacity: 0; }
+          60%  { stroke-dashoffset: 0; opacity: 1; }
+          80%  { stroke-dashoffset: 0; opacity: 1; }
+          92%  { opacity: 0; }
+          100% { stroke-dashoffset: 100; opacity: 0; }
         }
       `}</style>
     </section>

@@ -65,7 +65,7 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
 ---
 
 <section id={sectionId} class="bg-[var(--color-bg)]">
-  <header class="mx-auto max-w-[var(--container-wide)] px-6 pt-16 pb-6 md:px-10 md:pt-40 md:pb-16">
+  <header class={`mx-auto max-w-[var(--container-wide)] px-6 pb-6 md:px-10 md:pb-16 ${index === 0 ? "pt-8 md:pt-12" : "pt-16 md:pt-32"}`}>
     <div class="grid gap-4 md:grid-cols-12 md:items-end md:gap-6">
       <div class="md:col-span-3">
         <p class="eyebrow">— Série {String(index + 1).padStart(2, "0")}</p>

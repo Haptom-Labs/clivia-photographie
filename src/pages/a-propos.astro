@@ -4,10 +4,9 @@ import SplitScreen from "../components/sections/SplitScreen.astro";
 import ParallaxImage from "../components/sections/ParallaxImage.tsx";
 import { projets } from "../data/projets";
 
-const portrait = projets[0]?.images[5] ?? projets[0]?.cover;
-const editoImage =
-  projets[1]?.images[Math.floor(projets[1].images.length / 2)] ??
-  projets[0]?.images[3];
+// Images "À propos" — choisies manuellement (changer ici pour swap rapide)
+const portrait = "/images/intro/agence-dame-mirror.jpg";
+const editoImage = "/images/projets/florentine-du-chazaud/010_florentine-du-chazaud.jpg";
 ---
 
 <BaseLayout
@@ -18,7 +17,7 @@ const editoImage =
   <section class="bg-[var(--color-bg)] px-6 pt-28 pb-10 md:px-10 md:pt-56 md:pb-24">
     <div class="mx-auto max-w-[var(--container-wide)]">
       <p class="eyebrow mb-6">— À propos</p>
-      <h1 class="max-w-5xl font-display text-5xl leading-[0.98] tracking-[-0.015em] md:text-[clamp(3.6rem,7.5vw,7.6rem)]">
+      <h1 class="max-w-5xl font-display text-5xl leading-[1.04] tracking-[-0.015em] md:text-[clamp(3.6rem,7.5vw,7.6rem)] md:leading-[1.02]">
         Clivia <span class="italic font-light">Ambroise</span>,<br />photographe
         <span class="italic font-light">d'architecture</span>.
       </h1>
@@ -48,7 +47,7 @@ const editoImage =
           Comprendre l'intention de l'architecte. Choisir le moment, la lumière, l'angle.
           Ne pas surcharger. Donner à voir un projet, pas seulement le documenter.
         </p>
-        <p class="mt-8 max-w-xl text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)] md:mt-10">
+        <p class="mt-12 max-w-xl text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)] md:mt-14">
           (Texte placeholder — sera affiné avec Clivia.) Je collabore avec des agences
           comme Brochet Rose, Agence Dame, DGOT, Florentine du Chazaud. Mon territoire
           principal : Bordeaux, Saint-Émilion, Castres-sur-Gironde, Cap-Ferret. Voyages
@@ -77,14 +76,14 @@ const editoImage =
       </div>
       <ul class="md:col-span-8 grid grid-cols-1 gap-0 md:grid-cols-2">
         {projets.map((p) => (
-          <li class="border-t border-[var(--color-line)] py-6">
+          <li class="border-t border-[var(--color-line)] py-8">
             <a
               href={`/projets/${p.slug}`}
               data-cursor="link"
               class="block transition-colors hover:text-[var(--color-accent)]"
             >
               <p class="font-display text-2xl md:text-3xl">{p.title}</p>
-              <p class="mt-2 text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
+              <p class="mt-5 text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
                 {p.locations.join(" · ")}
               </p>
             </a>

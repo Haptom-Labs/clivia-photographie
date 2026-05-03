@@ -35,22 +35,13 @@ export default function ProjectsTeaser({ projets }: Props) {
         );
 
         const img = card.querySelector("img");
-        const overlay = card.querySelector("[data-card-overlay]");
-        const title = card.querySelector("[data-card-title]");
         if (!img) return;
 
         card.addEventListener("pointerenter", () => {
-          gsap.to(img, { scale: 1.06, duration: 0.9, ease: "power3.out" });
-          gsap.to(overlay, { opacity: 1, duration: 0.4 });
-          gsap.fromTo(
-            title,
-            { y: 12, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: "expo.out" },
-          );
+          gsap.to(img, { scale: 1.05, duration: 0.9, ease: "power3.out" });
         });
         card.addEventListener("pointerleave", () => {
           gsap.to(img, { scale: 1, duration: 1, ease: "power3.out" });
-          gsap.to(overlay, { opacity: 0, duration: 0.4 });
         });
       });
     }, ref);
@@ -58,9 +49,9 @@ export default function ProjectsTeaser({ projets }: Props) {
   }, []);
 
   return (
-    <section className="px-4 py-14 md:px-8 md:py-32">
+    <section className="px-4 pt-24 pb-14 md:px-8 md:py-32">
       <div className="mx-auto max-w-[var(--container-wide)]">
-        <div className="mb-8 flex flex-col gap-4 px-2 md:mb-20 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col gap-4 px-2 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow mb-3">Sélection</p>
             <h2 className="font-display text-4xl leading-[1.05] tracking-tight md:text-[clamp(2.6rem,5vw,5rem)]">
@@ -76,31 +67,32 @@ export default function ProjectsTeaser({ projets }: Props) {
           </a>
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-8">
+        <div ref={ref} className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-x-8 md:gap-y-6">
           {projets.map((p, idx) => {
             const layouts = [
               {
-                desktop: "md:col-span-7 md:row-span-2 md:aspect-[4/5]",
-                mobile: "aspect-[4/5]",
-                offset: "",
+                desktop: "md:col-span-7 md:row-span-2",
+                aspect: "aspect-[4/5] md:aspect-[3/5]",
+                translate: "",
               },
               {
-                desktop: "md:col-span-5 md:aspect-[1/1]",
-                mobile: "aspect-[1/1]",
-                offset: "ml-auto w-[95%]",
+                desktop: "md:col-span-5",
+                aspect: "aspect-[1/1] md:aspect-[4/5]",
+                translate: "md:translate-y-8",
               },
               {
-                desktop: "md:col-span-5 md:aspect-[3/4]",
-                mobile: "aspect-[3/4]",
-                offset: "mr-auto w-[97%]",
+                desktop: "md:col-span-5",
+                aspect: "aspect-[3/4] md:aspect-[1/1]",
+                translate: "",
               },
               {
-                desktop: "md:col-span-7 md:aspect-[16/10]",
-                mobile: "aspect-[16/11]",
-                offset: "ml-auto w-[98%]",
+                desktop: "md:col-span-12",
+                aspect: "aspect-[16/11] md:aspect-[21/9]",
+                translate: "",
               },
             ];
             const cfg = layouts[idx % layouts.length];
+            const num = String(idx + 1).padStart(2, "0");
 
             return (
               <a
@@ -108,7 +100,7 @@ export default function ProjectsTeaser({ projets }: Props) {
                 href={`/projets/${p.slug}`}
                 data-card
                 data-cursor="link"
-                className={`group relative overflow-hidden bg-[var(--color-ink)] ${cfg.mobile} ${cfg.desktop} ${cfg.offset} md:ml-0 md:mr-0 md:w-auto`}
+                className={`group relative block overflow-hidden bg-[var(--color-ink)] ${cfg.desktop} ${cfg.aspect} ${cfg.translate}`}
               >
                 <img
                   src={p.cover}
@@ -116,26 +108,27 @@ export default function ProjectsTeaser({ projets }: Props) {
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover will-change-transform"
                 />
-                <div
-                  data-card-overlay
-                  className="absolute inset-0 bg-gradient-to-t from-[rgba(14,14,12,0.85)] via-[rgba(14,14,12,0.25)] to-transparent opacity-100 md:opacity-0"
-                />
-                <div className="absolute inset-x-0 bottom-0 z-10 p-5 text-[var(--color-bg)] md:p-10">
-                  <div data-card-title>
-                    <p
-                      className="eyebrow opacity-80"
-                      style={{ color: "var(--color-bg)" }}
-                    >
-                      {p.locations.slice(0, 2).join(" · ")}
-                    </p>
-                    <h3 className="mt-2 font-display text-[2rem] leading-[0.98] md:text-[clamp(1.8rem,2.6vw,2.8rem)]">
-                      {p.title}
-                    </h3>
-                  </div>
-                </div>
-                <span className="absolute top-5 right-5 text-[0.66rem] tracking-[0.18em] uppercase text-[var(--color-bg)] opacity-70 md:top-8 md:right-8 md:text-[0.7rem]">
-                  {p.imageCount} photos
+
+                <span
+                  className="absolute top-5 left-5 z-10 font-display text-[0.7rem] tracking-[0.22em] uppercase opacity-80 md:top-7 md:left-7"
+                  style={{ color: "var(--color-bg)" }}
+                >
+                  — {num}
                 </span>
+
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-2/3 bg-gradient-to-t from-[rgba(14,14,12,0.62)] via-[rgba(14,14,12,0.18)] to-transparent" />
+
+                <div className="absolute inset-x-0 bottom-0 z-10 p-5 text-[var(--color-bg)] md:p-8">
+                  <p
+                    className="text-[0.66rem] tracking-[0.22em] uppercase opacity-85"
+                    style={{ color: "var(--color-bg)" }}
+                  >
+                    {p.locations.slice(0, 2).join(" · ")}
+                  </p>
+                  <h3 className="mt-3 font-display text-[1.9rem] leading-[1.02] tracking-[-0.005em] transition-colors group-hover:text-[var(--color-accent)] md:mt-4 md:text-[clamp(1.7rem,2.4vw,2.6rem)]">
+                    {p.title}
+                  </h3>
+                </div>
               </a>
             );
           })}
