@@ -68,10 +68,10 @@ export default function ProjectsTeaser({ projets }: Props) {
         <div ref={ref} className="grid grid-cols-2 gap-3 md:grid-cols-12 md:gap-x-8 md:gap-y-6">
           {(() => {
             const DISPLAY_ORDER = [
-              "agence-dame",
+              "brochetrose-architecture",
               "dgot",
               "florentine-du-chazaud",
-              "brochetrose-architecture",
+              "agence-dame",
             ];
             const ordered = DISPLAY_ORDER
               .map((slug) => projets.find((p) => p.slug === slug))

@@ -42,7 +42,7 @@ const CLIENTS = {
 
 // Overrides manuels de cover (key = slug projet, value = path public/) — précédence sur allImagesFlat[0]
 const COVER_OVERRIDES = {
-  "brochetrose-architecture": "/images/projets/brochetrose-architecture/3701883773011951169.jpg",
+  "brochetrose-architecture": "/images/projets/brochetrose-architecture/3481383345251303791_3481383330873131302.jpg",
   "florentine-du-chazaud": "/images/projets/florentine-du-chazaud/3774561766215576925_3774561756971295449.jpg",
   "dgot": "/images/projets/dgot/3772340301009311289.jpg",
 };

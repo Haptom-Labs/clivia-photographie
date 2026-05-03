@@ -232,7 +232,7 @@ export const projets: Projet[] = [
     ],
     "yearStart": 2024,
     "yearEnd": 2025,
-    "cover": "/images/projets/brochetrose-architecture/3701883773011951169.jpg",
+    "cover": "/images/projets/brochetrose-architecture/3481383345251303791_3481383330873131302.jpg",
     "imageCount": 73,
     "images": [
       "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
