@@ -9,6 +9,7 @@ interface Props {
   titleBottom: string;
   subtitle?: string;
   height?: "full" | "tall";
+  titleSize?: "default" | "compact";
 }
 
 export default function HeroFullBleed({
@@ -19,6 +20,7 @@ export default function HeroFullBleed({
   titleBottom,
   subtitle,
   height = "full",
+  titleSize = "default",
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -99,7 +101,11 @@ export default function HeroFullBleed({
         )}
         <h1
           ref={titleRef}
-          className="mt-5 font-display leading-[0.9] tracking-[-0.018em] text-[clamp(3.6rem,18vw,5.4rem)] md:text-[clamp(4.5rem,10vw,9.5rem)]"
+          className={`mt-5 font-display leading-[0.95] tracking-[-0.018em] ${
+            titleSize === "compact"
+              ? "text-[clamp(2.6rem,11vw,4.4rem)] md:text-[clamp(3.4rem,7vw,7rem)]"
+              : "text-[clamp(3.6rem,18vw,5.4rem)] md:text-[clamp(4.5rem,10vw,9.5rem)] leading-[0.9]"
+          }`}
         >
           <span className="block overflow-hidden">
             <span className="js-hero-line block">{titleTop}</span>
@@ -111,7 +117,10 @@ export default function HeroFullBleed({
           </span>
         </h1>
         {subtitle && (
-          <p className="mt-7 max-w-md text-[0.92rem] leading-relaxed opacity-85 md:text-[0.95rem]">
+          <p
+            className="max-w-md text-[0.92rem] leading-relaxed opacity-85 md:text-[0.95rem]"
+            style={{ marginTop: titleSize === "compact" ? "3rem" : "1.75rem" }}
+          >
             {subtitle}
           </p>
         )}
