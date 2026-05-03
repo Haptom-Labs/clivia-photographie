@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectsTeaser from "../../components/home/ProjectsTeaser.tsx";
+import LocationsStrip from "../../components/home/LocationsStrip.tsx";
+import { projets } from "../../data/projets";
+import { buildLocationCards } from "../../lib/locations";
+
+const locations = buildLocationCards();
+---
+
+<BaseLayout
+  title="Projets — Clivia Ambroise"
+  description="Quatre signatures d'agences d'architecture, six territoires. L'ensemble du portfolio de Clivia Ambroise."
+  ogImage={projets[0]?.cover}
+>
+  <section class="px-6 pt-40 pb-16 md:px-10 md:pt-56 md:pb-24">
+    <div class="mx-auto max-w-[var(--container-wide)]">
+      <p class="eyebrow mb-6">— Portfolio</p>
+      <h1 class="font-display text-5xl leading-[0.96] tracking-[-0.015em] md:text-[clamp(4rem,9vw,9rem)]">
+        Projets <span class="italic font-light">en cours</span><br />
+        et <span class="italic font-light">archives</span>.
+      </h1>
+      <p class="mt-10 max-w-xl text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+        Quatre agences d'architecture, six territoires, près de deux cents photographies.
+        Chaque projet est documenté en plusieurs reportages — choisissez une porte d'entrée
+        par signature ou par lieu.
+      </p>
+    </div>
+  </section>
+
+  <ProjectsTeaser client:visible projets={projets} />
+
+  <LocationsStrip client:visible locations={locations} />
+
+  <section class="bg-[var(--color-bg)] px-6 py-24 md:px-10 md:py-32">
+    <div class="mx-auto max-w-[var(--container-wide)]">
+      <p class="eyebrow mb-6">— Index</p>
+      <h2 class="font-display text-3xl leading-[1.1] md:text-5xl">Tout le travail, une page.</h2>
+      <ul class="mt-12 grid grid-cols-1 gap-x-12 gap-y-1 md:grid-cols-2">
+        {projets.map((p, i) => (
+          <li class="border-b border-[var(--color-line)]">
+            <a
+              href={`/projets/${p.slug}`}
+              data-cursor="link"
+              class="group flex items-baseline justify-between py-6 transition-colors hover:text-[var(--color-accent)]"
+            >
+              <span class="flex items-baseline gap-5">
+                <span class="text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span class="font-display text-2xl md:text-3xl">{p.title}</span>
+              </span>
+              <span class="text-xs tracking-[0.2em] uppercase text-[var(--color-mute)] transition-colors group-hover:text-[var(--color-accent)]">
+                {p.imageCount} →
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

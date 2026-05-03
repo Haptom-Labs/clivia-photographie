@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroFullBleed from "../components/sections/HeroFullBleed.tsx";
+import SplitScreen from "../components/sections/SplitScreen.astro";
+import AsymGrid from "../components/sections/AsymGrid.astro";
+import ProjectsTeaser from "../components/home/ProjectsTeaser.tsx";
+import LocationsStrip from "../components/home/LocationsStrip.tsx";
+import { projets, heroCandidates } from "../data/projets";
+import { buildLocationCards } from "../lib/locations";
+
+const heroImage = heroCandidates[1] ?? heroCandidates[0] ?? projets[0]?.cover;
+const locations = buildLocationCards();
+const introImage = projets[1]?.images[2] ?? projets[0]?.images[1];
+const ctaImage =
+  projets[0]?.images[Math.min(20, projets[0].images.length - 1)] ??
+  projets[0]?.cover;
+const filmGrid = projets
+  .flatMap((p) => p.images.slice(2, 4))
+  .slice(0, 4);
+---
+
+<BaseLayout
+  title="Clivia Ambroise — Photographe d'architecture · Bordeaux"
+  description="Reportages photo pour architectes et agences en Gironde, Saint-Émilion, Cap-Ferret. L'architecture racontée par la lumière."
+  ogImage={heroImage}
+>
+  <HeroFullBleed
+    client:load
+    image={heroImage}
+    alt="Photographie d'architecture par Clivia Ambroise"
+    eyebrow="Photographe d'architecture · Bordeaux"
+    titleTop="Clivia"
+    titleBottom="Ambroise"
+    subtitle="Architectes, agences, maîtres d'œuvre. Je photographie l'espace, la lumière et le détail — pour que vos projets soient vus comme vous les avez pensés."
+  />
+
+  <section class="bg-[var(--color-bg)] px-6 py-24 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-10 md:grid-cols-12">
+      <div class="md:col-span-3">
+        <p class="eyebrow">— Studio</p>
+      </div>
+      <div class="md:col-span-9">
+        <p class="font-display text-3xl leading-[1.18] tracking-[-0.005em] md:text-[clamp(2rem,3.4vw,3.6rem)]">
+          Reportages d'architecture, intérieurs et lieux d'exception.
+          Une approche calme, des cadres tenus, la lumière comme matière.
+          De Bordeaux au Cap-Ferret, en France et au-delà.
+        </p>
+        <a
+          href="/projets"
+          class="mt-12 inline-block border-b border-[var(--color-ink)] pb-1 text-[0.78rem] tracking-[0.22em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+        >
+          Découvrir le travail →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <SplitScreen
+    image={introImage}
+    alt="Détail architectural"
+    imagePosition="left"
+    ratio="4/5"
+    variant="parallax"
+    eyebrow="— Approche"
+    title="Donner à voir un projet, pas seulement le documenter."
+    body="Travailler comme un architecte — comprendre l'intention, choisir le moment, tenir le cadre. Chaque reportage est pensé pour vivre dans la presse, sur votre site, dans vos books, et durer."
+    meta="Bordeaux · Gironde · France"
+    contentBg="warm"
+  />
+
+  <ProjectsTeaser client:visible projets={projets} />
+
+  <AsymGrid
+    images={filmGrid}
+    variant="duo"
+    altPrefix="Sélection"
+    startIndex={0}
+  />
+  <AsymGrid
+    images={filmGrid}
+    variant="60-40"
+    altPrefix="Sélection"
+    startIndex={2}
+  />
+
+  <LocationsStrip client:visible locations={locations} />
+
+  <section
+    class="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-bg)]"
+  >
+    <img
+      src={ctaImage}
+      alt=""
+      loading="lazy"
+      class="js-cursor-media absolute inset-0 -z-10 h-full w-full object-cover opacity-55"
+    />
+    <div class="mx-auto max-w-[var(--container-wide)] px-6 py-32 md:px-10 md:py-48">
+      <p class="eyebrow opacity-70" style="color: var(--color-bg);">— Contact</p>
+      <h2
+        class="mt-6 max-w-3xl font-display text-5xl leading-[0.96] md:text-[clamp(3.5rem,7vw,7.5rem)]"
+      >
+        Discutons de <span class="italic font-light">votre projet</span>.
+      </h2>
+      <div class="mt-12 flex flex-col gap-6 md:flex-row md:items-center md:gap-12">
+        <a
+          href="mailto:contact@cliviaambroise.com"
+          class="border-b border-[var(--color-bg)] pb-1 text-sm tracking-[0.2em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+          data-cursor="link"
+        >
+          contact@cliviaambroise.com
+        </a>
+        <span class="text-sm opacity-60">— Bordeaux, Gironde</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+import ParallaxImage from "./ParallaxImage.tsx";
+import ImageReveal from "./ImageReveal.tsx";
+
+interface Props {
+  image: string;
+  alt?: string;
+  imagePosition?: "left" | "right";
+  ratio?: "4/5" | "3/4" | "1/1" | "16/9";
+  variant?: "parallax" | "reveal";
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  meta?: string;
+  contentBg?: "warm" | "bg" | "ink";
+}
+
+const {
+  image,
+  alt = "",
+  imagePosition = "left",
+  ratio = "4/5",
+  variant = "parallax",
+  eyebrow,
+  title,
+  body,
+  meta,
+  contentBg = "bg",
+} = Astro.props;
+
+const bgCls =
+  contentBg === "warm"
+    ? "bg-[var(--color-bg-warm)]"
+    : contentBg === "ink"
+      ? "bg-[var(--color-ink)] text-[var(--color-bg)]"
+      : "bg-[var(--color-bg)]";
+---
+
+<section class={`grid items-stretch gap-0 md:grid-cols-12 md:gap-0 ${bgCls}`}>
+  <div
+    class:list={[
+      "md:col-span-7",
+      imagePosition === "right" && "md:order-2",
+    ]}
+  >
+    {variant === "parallax" ? (
+      <ParallaxImage src={image} alt={alt} ratio={ratio} client:visible />
+    ) : (
+      <ImageReveal src={image} alt={alt} ratio={ratio} reveal="up" client:visible />
+    )}
+  </div>
+
+  <div
+    class:list={[
+      "md:col-span-5 flex flex-col justify-center px-6 py-16 md:px-12 md:py-24",
+      imagePosition === "right" && "md:order-1",
+    ]}
+  >
+    {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
+    {title && (
+      <h2 class="font-display text-4xl leading-[1.04] md:text-[clamp(2.4rem,4.2vw,4.4rem)]">
+        {title}
+      </h2>
+    )}
+    {body && (
+      <p class="mt-6 max-w-md text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+        {body}
+      </p>
+    )}
+    {meta && (
+      <p class="mt-10 text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
+        {meta}
+      </p>
+    )}
+    <slot />
+  </div>
+</section>

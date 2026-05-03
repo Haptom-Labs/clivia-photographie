@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SplitScreen from "../components/sections/SplitScreen.astro";
+import ParallaxImage from "../components/sections/ParallaxImage.tsx";
+import { projets } from "../data/projets";
+
+const portrait = projets[0]?.images[5] ?? projets[0]?.cover;
+const editoImage =
+  projets[1]?.images[Math.floor(projets[1].images.length / 2)] ??
+  projets[0]?.images[3];
+---
+
+<BaseLayout
+  title="À propos — Clivia Ambroise"
+  description="Photographe d'architecture indépendante basée à Bordeaux. Reportages pour agences, architectes, maîtres d'œuvre et propriétaires de lieux d'exception."
+  ogImage={portrait}
+>
+  <section class="bg-[var(--color-bg)] px-6 pt-40 pb-16 md:px-10 md:pt-56 md:pb-24">
+    <div class="mx-auto max-w-[var(--container-wide)]">
+      <p class="eyebrow mb-6">— À propos</p>
+      <h1 class="max-w-5xl font-display text-5xl leading-[0.98] tracking-[-0.015em] md:text-[clamp(3.6rem,7.5vw,7.6rem)]">
+        Clivia <span class="italic font-light">Ambroise</span>,<br />photographe
+        <span class="italic font-light">d'architecture</span>.
+      </h1>
+    </div>
+  </section>
+
+  <SplitScreen
+    image={portrait}
+    alt="Clivia Ambroise — portrait professionnel"
+    imagePosition="left"
+    ratio="4/5"
+    variant="parallax"
+    eyebrow="— Portrait"
+    title="Une approche calme, des cadres tenus."
+    body="Texte de présentation à finaliser. — Photographe basée à Bordeaux, je travaille pour des agences d'architecture, des architectes d'intérieur, des bureaux d'études et des propriétaires de lieux singuliers. Mon travail s'inscrit dans le temps : je documente vos projets pour qu'ils circulent dans la presse, sur vos sites, dans vos books, et qu'ils gardent leur force des années plus tard."
+    meta="Bordeaux · Gironde · France"
+    contentBg="warm"
+  />
+
+  <section class="px-6 py-24 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-12 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <p class="eyebrow">— Démarche</p>
+      </div>
+      <div class="md:col-span-8">
+        <p class="font-display text-2xl leading-[1.32] md:text-[clamp(1.6rem,2.4vw,2.4rem)]">
+          Comprendre l'intention de l'architecte. Choisir le moment, la lumière, l'angle.
+          Ne pas surcharger. Donner à voir un projet, pas seulement le documenter.
+        </p>
+        <p class="mt-10 max-w-xl text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+          (Texte placeholder — sera affiné avec Clivia.) Je collabore avec des agences
+          comme Brochet Rose, Agence Dame, DGOT, Florentine du Chazaud. Mon territoire
+          principal : Bordeaux, Saint-Émilion, Castres-sur-Gironde, Cap-Ferret. Voyages
+          réguliers en France et en Italie.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ParallaxImage
+    src={editoImage}
+    alt="Détail architectural"
+    ratio="21/9"
+    speed={0.2}
+    client:visible
+    className="my-8 md:my-16"
+  />
+
+  <section class="px-6 py-24 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-12 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <p class="eyebrow">— Confiance</p>
+        <h2 class="mt-4 font-display text-3xl leading-[1.05] md:text-5xl">
+          Ils me confient leurs <span class="italic font-light">projets</span>.
+        </h2>
+      </div>
+      <ul class="md:col-span-8 grid grid-cols-1 gap-0 md:grid-cols-2">
+        {projets.map((p) => (
+          <li class="border-t border-[var(--color-line)] py-6">
+            <a
+              href={`/projets/${p.slug}`}
+              data-cursor="link"
+              class="block transition-colors hover:text-[var(--color-accent)]"
+            >
+              <p class="font-display text-2xl md:text-3xl">{p.title}</p>
+              <p class="mt-2 text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
+                {p.locations.join(" · ")}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-bg-warm)] px-6 py-24 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-12 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <p class="eyebrow">— Contact</p>
+      </div>
+      <div class="md:col-span-8">
+        <h2 class="font-display text-4xl leading-[1.04] md:text-[clamp(2.4rem,4.4vw,4.8rem)]">
+          Travailler ensemble<br /><span class="italic font-light">sur votre prochain projet.</span>
+        </h2>
+        <a
+          href="mailto:contact@cliviaambroise.com"
+          class="mt-8 inline-block border-b border-[var(--color-ink)] pb-1 text-sm tracking-[0.2em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+          data-cursor="link"
+        >
+          contact@cliviaambroise.com
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

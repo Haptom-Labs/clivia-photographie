@@ -1,0 +1,52 @@
+---
+import ImageReveal from "./ImageReveal.tsx";
+
+interface Props {
+  images: string[];
+  variant?: "60-40" | "40-60" | "trio" | "duo";
+  className?: string;
+  altPrefix?: string;
+  startIndex?: number;
+}
+
+const { images, variant = "60-40", className = "", altPrefix = "Photographie", startIndex = 0 } = Astro.props;
+
+const safe = (i: number) => images[i % images.length];
+
+const layouts: Record<string, { ratio: ("16/9" | "4/5" | "3/4" | "1/1" | "21/9")[]; cols: string[] }> = {
+  "60-40": {
+    ratio: ["4/5", "3/4"],
+    cols: ["md:col-span-7", "md:col-span-5"],
+  },
+  "40-60": {
+    ratio: ["3/4", "4/5"],
+    cols: ["md:col-span-5", "md:col-span-7"],
+  },
+  duo: {
+    ratio: ["1/1", "1/1"],
+    cols: ["md:col-span-6", "md:col-span-6"],
+  },
+  trio: {
+    ratio: ["3/4", "4/5", "3/4"],
+    cols: ["md:col-span-4", "md:col-span-4", "md:col-span-4"],
+  },
+};
+
+const cfg = layouts[variant];
+---
+
+<section class={`px-4 py-8 md:px-8 md:py-16 ${className}`}>
+  <div class="mx-auto grid max-w-[var(--container-wide)] grid-cols-1 gap-4 md:grid-cols-12 md:gap-6">
+    {cfg.ratio.map((r, i) => (
+      <div class={cfg.cols[i]}>
+        <ImageReveal
+          src={safe(startIndex + i)}
+          alt={`${altPrefix} ${startIndex + i + 1}`}
+          ratio={r}
+          reveal={i % 2 === 0 ? "up" : "left"}
+          client:visible
+        />
+      </div>
+    ))}
+  </div>
+</section>

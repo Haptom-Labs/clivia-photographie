@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroFullBleed from "../../components/sections/HeroFullBleed.tsx";
+import LookbookSection from "../../components/projet/LookbookSection.astro";
+import { projets } from "../../data/projets";
+
+export function getStaticPaths() {
+  return projets.map((p) => ({ params: { slug: p.slug }, props: { projet: p } }));
+}
+
+const { projet } = Astro.props;
+const others = projets.filter((p) => p.slug !== projet.slug);
+const idx = projets.findIndex((p) => p.slug === projet.slug);
+const next = projets[(idx + 1) % projets.length];
+const prev = projets[(idx - 1 + projets.length) % projets.length];
+
+const heroImage = projet.images[1] ?? projet.cover;
+const yearRange =
+  projet.yearStart === projet.yearEnd
+    ? `${projet.yearStart}`
+    : `${projet.yearStart} – ${projet.yearEnd}`;
+---
+
+<BaseLayout
+  title={`${projet.title} — Clivia Ambroise`}
+  description={projet.blurb}
+  ogImage={projet.cover}
+>
+  <HeroFullBleed
+    client:load
+    image={heroImage}
+    alt={projet.title}
+    eyebrow={`— Projet ${String(idx + 1).padStart(2, "0")}`}
+    titleTop={projet.title.split(" ")[0]}
+    titleBottom={projet.title.split(" ").slice(1).join(" ") || projet.title}
+    subtitle={projet.blurb}
+    height="tall"
+  />
+
+  <section class="bg-[var(--color-bg)] px-6 py-20 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-10 md:grid-cols-12">
+      <div class="md:col-span-3">
+        <p class="eyebrow">— Reportage</p>
+      </div>
+      <div class="md:col-span-9 grid gap-10 md:grid-cols-3">
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Client</p>
+          <p class="mt-2 font-display text-2xl">{projet.client}</p>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Lieux</p>
+          <ul class="mt-2 flex flex-col gap-1 font-display text-2xl">
+            {projet.locations.map((l) => <li>{l}</li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Période</p>
+          <p class="mt-2 font-display text-2xl">{yearRange}</p>
+          <p class="mt-1 text-sm text-[var(--color-mute)]">{projet.imageCount} photographies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {projet.series.map((s, i) => (
+    <LookbookSection series={s} index={i} client={projet.client} />
+  ))}
+
+  <section
+    class="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-bg)]"
+  >
+    <img
+      src={next.cover}
+      alt=""
+      loading="lazy"
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
+    />
+    <a
+      href={`/projets/${next.slug}`}
+      data-cursor="link"
+      class="block px-6 py-32 md:px-10 md:py-48"
+    >
+      <div class="mx-auto max-w-[var(--container-wide)]">
+        <p class="eyebrow opacity-70" style="color: var(--color-bg);">
+          Projet suivant
+        </p>
+        <h2 class="mt-6 font-display text-5xl leading-[0.96] md:text-[clamp(3rem,7vw,7rem)]">
+          {next.title} <span class="italic font-light">→</span>
+        </h2>
+        <p class="mt-6 text-sm opacity-70">{next.locations.join(" · ")}</p>
+      </div>
+    </a>
+  </section>
+
+  <section class="bg-[var(--color-bg)] px-6 py-12 md:px-10">
+    <div class="mx-auto flex max-w-[var(--container-wide)] flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <a
+        href={`/projets/${prev.slug}`}
+        class="text-sm tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
+      >
+        ← {prev.title}
+      </a>
+      <a
+        href="/projets"
+        class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)] transition-colors hover:text-[var(--color-ink)]"
+      >
+        Tous les projets
+      </a>
+      <a
+        href={`/projets/${next.slug}`}
+        class="text-sm tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
+      >
+        {next.title} →
+      </a>
+    </div>
+  </section>
+</BaseLayout>
