@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Projet } from "../../data/projets";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   projets: Projet[];
@@ -13,7 +16,23 @@ export default function ProjectsTeaser({ projets }: Props) {
     const ctx = gsap.context(() => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const cards = ref.current?.querySelectorAll<HTMLAnchorElement>("[data-card]");
-      cards?.forEach((card) => {
+      cards?.forEach((card, idx) => {
+        // Apparition: card cachée AU MOUNT (immediateRender true, défaut), tween dès qu'elle entre dans le viewport.
+        // start "top bottom-=80" = déclenche AVANT qu'elle soit visible à l'œil → pas de flash possible.
+        // once:true = pas de re-trigger au scroll up/down (évite les sauts).
+        gsap.from(card, {
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          delay: idx * 0.07,
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom-=80",
+            once: true,
+          },
+        });
+
         const img = card.querySelector("img");
         if (!img) return;
         card.addEventListener("pointerenter", () => {
