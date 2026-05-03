@@ -69,9 +69,9 @@ export default function LocationsStrip({ locations }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[var(--color-bg-warm)] py-20 md:py-28"
+      className="relative overflow-hidden bg-[var(--color-bg-warm)] py-14 md:py-28"
     >
-      <div className="mx-auto mb-10 flex max-w-[var(--container-wide)] flex-col gap-3 px-6 md:mb-16 md:px-10">
+      <div className="mx-auto mb-8 flex max-w-[var(--container-wide)] flex-col gap-3 px-6 md:mb-16 md:px-10">
         <p className="eyebrow">Territoires</p>
         <h2 className="font-display text-3xl leading-tight md:text-[clamp(2.2rem,3.6vw,3.8rem)]">
           Un travail <span className="italic font-light">enraciné</span> en Gironde.
@@ -80,16 +80,16 @@ export default function LocationsStrip({ locations }: Props) {
 
       <div
         ref={trackRef}
-        className="flex gap-6 px-6 md:gap-10 md:px-10 md:will-change-transform"
-        style={{ width: "max-content" }}
+        className="flex gap-5 overflow-x-auto px-5 w-full [scroll-snap-type:x_mandatory] [-webkit-overflow-scrolling:touch] md:w-max md:gap-10 md:overflow-visible md:px-10 md:will-change-transform [&::-webkit-scrollbar]:hidden"
+        style={{ scrollbarWidth: "none" }}
       >
         {locations.map((loc) => (
           <div
             key={loc.name}
             data-loc-item
             data-cursor="media"
-            className="relative shrink-0 overflow-hidden bg-[var(--color-ink)]"
-            style={{ width: "min(78vw, 540px)", aspectRatio: "3 / 4" }}
+            className="relative shrink-0 overflow-hidden bg-[var(--color-ink)] [scroll-snap-align:start] md:[scroll-snap-align:none]"
+            style={{ width: "min(82vw, 540px)", aspectRatio: "3 / 4" }}
           >
             <img
               src={loc.image}

@@ -65,8 +65,8 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
 ---
 
 <section id={sectionId} class="bg-[var(--color-bg)]">
-  <header class="mx-auto max-w-[var(--container-wide)] px-6 pt-24 pb-10 md:px-10 md:pt-40 md:pb-16">
-    <div class="grid gap-6 md:grid-cols-12 md:items-end">
+  <header class="mx-auto max-w-[var(--container-wide)] px-6 pt-16 pb-6 md:px-10 md:pt-40 md:pb-16">
+    <div class="grid gap-4 md:grid-cols-12 md:items-end md:gap-6">
       <div class="md:col-span-3">
         <p class="eyebrow">— Série {String(index + 1).padStart(2, "0")}</p>
       </div>
@@ -74,7 +74,7 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
         <h2 class="font-display text-4xl leading-[1.04] md:text-[clamp(2.6rem,5vw,5.4rem)]">
           {series.location}
         </h2>
-        <p class="mt-4 text-sm tracking-[0.2em] uppercase text-[var(--color-mute)]">
+        <p class="mt-3 text-sm tracking-[0.2em] uppercase text-[var(--color-mute)] md:mt-4">
           {client}
           {series.year && <span> · {series.year}</span>}
           <span> · {imgs.length} photographies</span>
@@ -83,7 +83,7 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
     </div>
   </header>
 
-  <div class="flex flex-col gap-12 md:gap-20">
+  <div class="flex flex-col gap-6 md:gap-20">
     {blocks.map((b, idx) => {
       if (b.kind === "fullbleed") {
         return (
@@ -97,11 +97,11 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
       }
       if (b.kind === "60-40") {
         return (
-          <div class="mx-auto grid w-full max-w-[var(--container-wide)] grid-cols-1 gap-4 px-4 md:grid-cols-12 md:gap-6 md:px-8">
-            <div class="md:col-span-7">
+          <div class="mx-auto flex w-full max-w-[var(--container-wide)] flex-col gap-3 px-2 md:grid md:grid-cols-12 md:gap-6 md:px-8">
+            <div class="w-full self-start md:col-span-7 md:w-auto">
               <ImageReveal src={b.a} alt={`${series.location} ${idx} a`} ratio="4/5" reveal="up" client:visible />
             </div>
-            <div class="md:col-span-5">
+            <div class="w-[94%] self-end md:col-span-5 md:w-auto md:self-auto">
               <ImageReveal src={b.b} alt={`${series.location} ${idx} b`} ratio="3/4" reveal="left" client:visible />
             </div>
           </div>
@@ -109,11 +109,11 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
       }
       if (b.kind === "40-60") {
         return (
-          <div class="mx-auto grid w-full max-w-[var(--container-wide)] grid-cols-1 gap-4 px-4 md:grid-cols-12 md:gap-6 md:px-8">
-            <div class="md:col-span-5">
+          <div class="mx-auto flex w-full max-w-[var(--container-wide)] flex-col gap-3 px-2 md:grid md:grid-cols-12 md:gap-6 md:px-8">
+            <div class="w-[94%] self-start md:col-span-5 md:w-auto md:self-auto">
               <ImageReveal src={b.a} alt={`${series.location} ${idx} a`} ratio="3/4" reveal="right" client:visible />
             </div>
-            <div class="md:col-span-7">
+            <div class="w-full self-end md:col-span-7 md:w-auto">
               <ImageReveal src={b.b} alt={`${series.location} ${idx} b`} ratio="4/5" reveal="up" client:visible />
             </div>
           </div>
@@ -121,18 +121,28 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
       }
       if (b.kind === "duo") {
         return (
-          <div class="mx-auto grid w-full max-w-[var(--container-wide)] grid-cols-1 gap-4 px-4 md:grid-cols-2 md:gap-6 md:px-8">
-            <ImageReveal src={b.a} alt={`${series.location} ${idx} a`} ratio="1/1" reveal="up" client:visible />
-            <ImageReveal src={b.b} alt={`${series.location} ${idx} b`} ratio="1/1" reveal="left" client:visible />
+          <div class="mx-auto flex w-full max-w-[var(--container-wide)] flex-col gap-3 px-2 md:grid md:grid-cols-2 md:gap-6 md:px-8">
+            <div class="w-[97%] self-start md:w-auto md:self-auto">
+              <ImageReveal src={b.a} alt={`${series.location} ${idx} a`} ratio="1/1" reveal="up" client:visible />
+            </div>
+            <div class="w-[97%] self-end md:w-auto md:self-auto">
+              <ImageReveal src={b.b} alt={`${series.location} ${idx} b`} ratio="1/1" reveal="left" client:visible />
+            </div>
           </div>
         );
       }
       if (b.kind === "trio") {
         return (
-          <div class="mx-auto grid w-full max-w-[var(--container-wide)] grid-cols-1 gap-4 px-4 md:grid-cols-3 md:gap-6 md:px-8">
-            <ImageReveal src={b.a} alt={`${series.location} ${idx} a`} ratio="3/4" reveal="up" client:visible />
-            <ImageReveal src={b.b} alt={`${series.location} ${idx} b`} ratio="4/5" reveal="left" client:visible />
-            <ImageReveal src={b.c} alt={`${series.location} ${idx} c`} ratio="3/4" reveal="up" client:visible />
+          <div class="mx-auto flex w-full max-w-[var(--container-wide)] flex-col gap-3 px-2 md:grid md:grid-cols-3 md:gap-6 md:px-8">
+            <div class="w-full self-start md:w-auto md:self-auto">
+              <ImageReveal src={b.a} alt={`${series.location} ${idx} a`} ratio="3/4" reveal="up" client:visible />
+            </div>
+            <div class="w-[94%] self-end md:w-auto md:self-auto">
+              <ImageReveal src={b.b} alt={`${series.location} ${idx} b`} ratio="4/5" reveal="left" client:visible />
+            </div>
+            <div class="w-[96%] self-start md:w-auto md:self-auto">
+              <ImageReveal src={b.c} alt={`${series.location} ${idx} c`} ratio="3/4" reveal="up" client:visible />
+            </div>
           </div>
         );
       }

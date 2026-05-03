@@ -565,6 +565,82 @@ export const projets: Projet[] = [
   }
 ];
 
+export const carnetVoyage: Omit<Projet, "client"> | null = {
+  "slug": "carnet-de-voyage",
+  "title": "Carnet de voyage",
+  "blurb": "Notes visuelles, voyages personnels — quand l'œil ne travaille pas pour les autres.",
+  "locations": [
+    "Pouilles, Italie",
+    "Châteaux de la Loire"
+  ],
+  "yearStart": 2024,
+  "yearEnd": 2025,
+  "cover": "/images/projets/carnet-de-voyage/001_italie-pouilles.jpg",
+  "imageCount": 20,
+  "images": [
+    "/images/projets/carnet-de-voyage/001_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/002_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/003_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/004_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/005_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/006_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/007_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/008_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/009_italie-pouilles.jpg",
+    "/images/projets/carnet-de-voyage/010_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/011_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/012_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/013_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/014_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/015_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/016_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/017_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/018_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/019_chateaux-de-la-loire.jpg",
+    "/images/projets/carnet-de-voyage/020_chateaux-de-la-loire.jpg"
+  ],
+  "series": [
+    {
+      "slug": "italie-pouilles",
+      "location": "Pouilles, Italie",
+      "date": "2025-09-08",
+      "year": 2025,
+      "postCount": 6,
+      "images": [
+        "/images/projets/carnet-de-voyage/001_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/002_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/003_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/004_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/005_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/006_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/007_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/008_italie-pouilles.jpg",
+        "/images/projets/carnet-de-voyage/009_italie-pouilles.jpg"
+      ]
+    },
+    {
+      "slug": "chateaux-de-la-loire",
+      "location": "Châteaux de la Loire",
+      "date": "2024-06-18",
+      "year": 2024,
+      "postCount": 3,
+      "images": [
+        "/images/projets/carnet-de-voyage/010_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/011_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/012_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/013_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/014_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/015_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/016_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/017_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/018_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/019_chateaux-de-la-loire.jpg",
+        "/images/projets/carnet-de-voyage/020_chateaux-de-la-loire.jpg"
+      ]
+    }
+  ]
+};
+
 export const heroCandidates: string[] = [
   "/images/projets/agence-dame/001_agence-dame.jpg",
   "/images/projets/agence-dame/002_agence-dame.jpg",

@@ -83,6 +83,7 @@ async function main() {
   const seenPosts = new Set();
   const posts = [];
 
+  const voyagePosts = [];
   for (const f of files.sort()) {
     const raw = await fs.readFile(path.join(SRC, f), "utf8");
     const d = JSON.parse(raw);
@@ -90,9 +91,35 @@ async function main() {
     seenPosts.add(d.post_id);
 
     const clients = detectClients(d.description);
-    if (!clients.length) continue;
-
     const lieuRaw = parseLocation(d.description);
+    const lieuKey0 = lieuRaw ? stripDiacritics(lieuRaw) : null;
+    const lieuSlug0 = lieuKey0 ? LOCATION_SLUG[lieuKey0] ?? null : null;
+
+    if (!clients.length) {
+      // Carnet de voyage : posts sans mention client mais avec lieu identifie
+      if (lieuSlug0) {
+        const allFiles0 = readdirSync(SRC)
+          .filter(
+            (fn) => fn.startsWith(`${d.post_id}_`) || fn === `${d.post_id}.jpg`,
+          )
+          .filter((fn) => fn.endsWith(".jpg"))
+          .sort();
+        if (allFiles0.length) {
+          const date0 = (d.post_date || "").slice(0, 10);
+          voyagePosts.push({
+            post_id: d.post_id,
+            url: d.post_url,
+            date: date0,
+            year: parseInt(date0.slice(0, 4)) || new Date().getFullYear(),
+            lieu_raw: lieuRaw,
+            lieu_slug: lieuSlug0,
+            jpg_files: allFiles0,
+          });
+        }
+      }
+      continue;
+    }
+
     const lieuKey = lieuRaw ? stripDiacritics(lieuRaw) : null;
     const lieuSlug = lieuKey ? LOCATION_SLUG[lieuKey] ?? null : null;
     const date = (d.post_date || "").slice(0, 10);
@@ -229,6 +256,75 @@ async function main() {
 
   const heroCandidates = projetsArray[0]?.images.slice(0, 6) || [];
 
+  // === Carnet de voyage ===
+  const VOYAGE_LABELS = {
+    "italie-pouilles": "Pouilles, Italie",
+    "chateaux-de-la-loire": "Châteaux de la Loire",
+  };
+  const voyageBySlug = new Map();
+  for (const p of voyagePosts) {
+    if (!voyageBySlug.has(p.lieu_slug)) {
+      voyageBySlug.set(p.lieu_slug, {
+        slug: p.lieu_slug,
+        location: VOYAGE_LABELS[p.lieu_slug] ?? p.lieu_raw,
+        posts: [],
+      });
+    }
+    voyageBySlug.get(p.lieu_slug).posts.push(p);
+  }
+  const voyageDir = path.join(OUT_IMG, "carnet-de-voyage");
+  ensureDir(voyageDir);
+  const voyageSeries = [];
+  let voyageCounter = 1;
+  const voyageAllImages = [];
+  const sortedVoyageSeries = [...voyageBySlug.values()].sort((a, b) => {
+    const da = a.posts[0]?.date || "";
+    const db = b.posts[0]?.date || "";
+    return db.localeCompare(da);
+  });
+  for (const s of sortedVoyageSeries) {
+    const sortedPosts = [...s.posts].sort((a, b) => a.date.localeCompare(b.date));
+    const seriesImages = [];
+    for (const p of sortedPosts) {
+      for (const fname of p.jpg_files) {
+        const ext = path.extname(fname);
+        const idx = String(voyageCounter).padStart(3, "0");
+        const newName = `${idx}_${s.slug}${ext}`;
+        const srcPath = path.join(SRC, fname);
+        const dstPath = path.join(voyageDir, newName);
+        if (!existsSync(dstPath)) await fs.copyFile(srcPath, dstPath);
+        const webPath = `/images/projets/carnet-de-voyage/${newName}`;
+        seriesImages.push(webPath);
+        voyageAllImages.push(webPath);
+        voyageCounter += 1;
+      }
+    }
+    voyageSeries.push({
+      slug: s.slug,
+      location: s.location,
+      date: sortedPosts[0]?.date || "",
+      year: sortedPosts[0]?.year || null,
+      postCount: sortedPosts.length,
+      images: seriesImages,
+    });
+  }
+  const voyageYears = voyagePosts.map((p) => p.year).filter(Boolean);
+  const carnetVoyage = voyagePosts.length
+    ? {
+        slug: "carnet-de-voyage",
+        title: "Carnet de voyage",
+        blurb:
+          "Notes visuelles, voyages personnels — quand l'œil ne travaille pas pour les autres.",
+        locations: voyageSeries.map((s) => s.location),
+        yearStart: Math.min(...voyageYears),
+        yearEnd: Math.max(...voyageYears),
+        cover: voyageAllImages[0] || "",
+        imageCount: voyageAllImages.length,
+        images: voyageAllImages,
+        series: voyageSeries,
+      }
+    : null;
+
   const ts = `// Auto-genere par scripts/build-projets-data.mjs - ne pas editer manuellement
 // Source: ~/Desktop/site-photographie (Instagram @cliviaambroise_photographie)
 
@@ -256,6 +352,8 @@ export type Projet = {
 };
 
 export const projets: Projet[] = ${JSON.stringify(projetsArray, null, 2)};
+
+export const carnetVoyage: Omit<Projet, "client"> | null = ${JSON.stringify(carnetVoyage, null, 2)};
 
 export const heroCandidates: string[] = ${JSON.stringify(heroCandidates, null, 2)};
 

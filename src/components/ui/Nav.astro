@@ -3,6 +3,7 @@ const path = Astro.url.pathname;
 const isHome = path === "/";
 const items = [
   { href: "/projets", label: "Projets" },
+  { href: "/carnet-de-voyage", label: "Carnet de voyage" },
   { href: "/a-propos", label: "À propos" },
   { href: "/contact", label: "Contact" },
 ];
@@ -10,22 +11,32 @@ const items = [
 
 <header
   class:list={[
-    "fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter] duration-500",
-    isHome ? "bg-transparent" : "bg-[color-mix(in_oklab,var(--color-bg)_82%,transparent)] backdrop-blur-md",
+    "fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,color] duration-500",
+    isHome
+      ? "bg-transparent text-[var(--color-bg)]"
+      : "bg-[color-mix(in_oklab,var(--color-bg)_82%,transparent)] backdrop-blur-md text-[var(--color-ink)]",
   ]}
   data-nav
+  data-is-home={isHome}
 >
-  <div class="mx-auto flex h-16 max-w-[var(--container-wide)] items-center justify-between px-6 md:h-20 md:px-10">
+  <div class="mx-auto flex h-16 max-w-[var(--container-wide)] items-center justify-between px-5 md:h-20 md:px-10">
     <a
       href="/"
-      class="font-display text-[1.05rem] tracking-tight md:text-[1.15rem]"
+      class="font-display text-[0.98rem] tracking-tight md:text-[1.15rem]"
       aria-label="Clivia Ambroise — Accueil"
     >
       <span class="font-medium">Clivia Ambroise</span>
-      <span class="ml-1 hidden text-[var(--color-mute)] md:inline">— Photographe</span>
+      <span
+        class:list={[
+          "ml-1 hidden md:inline transition-colors duration-500",
+          isHome ? "opacity-70" : "text-[var(--color-mute)]",
+        ]}
+      >
+        — Photographe
+      </span>
     </a>
 
-    <nav class="flex items-center gap-7 text-[0.78rem] font-medium tracking-[0.18em] uppercase md:gap-9">
+    <nav class="hidden items-center gap-7 text-[0.74rem] font-medium tracking-[0.16em] uppercase md:flex lg:gap-9 lg:text-[0.78rem] lg:tracking-[0.18em]">
       {
         items.map((item) => (
           <a
@@ -40,23 +51,110 @@ const items = [
         ))
       }
     </nav>
+
+    <button
+      type="button"
+      class="md:hidden flex h-10 w-10 items-center justify-center"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-burger
+    >
+      <span class="relative block h-[12px] w-7" data-burger-icon>
+        <span
+          class="absolute inset-x-0 top-0 block h-px bg-current transition-transform duration-400"
+          data-burger-line="top"
+        ></span>
+        <span
+          class="absolute inset-x-0 bottom-0 block h-px bg-current transition-transform duration-400"
+          data-burger-line="bottom"
+        ></span>
+      </span>
+    </button>
   </div>
 </header>
 
+<div
+  id="mobile-menu"
+  class="pointer-events-none fixed inset-0 z-[55] flex flex-col bg-[var(--color-ink)] text-[var(--color-bg)] opacity-0 [clip-path:inset(0%_0%_100%_0%)] transition-[clip-path,opacity] duration-700 ease-[cubic-bezier(.7,.05,.05,1)] md:hidden"
+  data-mobile-menu
+  aria-hidden="true"
+>
+  <div class="flex h-16 items-center justify-between px-5">
+    <span class="font-display text-[0.98rem]">Clivia Ambroise</span>
+    <button
+      type="button"
+      class="flex h-10 w-10 items-center justify-center"
+      aria-label="Fermer le menu"
+      data-burger-close
+    >
+      <span class="relative block h-4 w-4">
+        <span class="absolute inset-x-0 top-1/2 block h-px -translate-y-1/2 rotate-45 bg-current"></span>
+        <span class="absolute inset-x-0 top-1/2 block h-px -translate-y-1/2 -rotate-45 bg-current"></span>
+      </span>
+    </button>
+  </div>
+
+  <nav class="flex flex-1 flex-col justify-center px-5 pb-16">
+    <ul class="flex flex-col gap-4">
+      <li class="overflow-hidden" data-menu-line>
+        <a
+          href="/"
+          class="block font-display text-[clamp(2.2rem,9.5vw,4.4rem)] leading-[1] whitespace-nowrap"
+        >
+          Accueil
+        </a>
+      </li>
+      {
+        items.map((item) => (
+          <li class="overflow-hidden" data-menu-line>
+            <a
+              href={item.href}
+              class="block font-display text-[clamp(2.2rem,9.5vw,4.4rem)] leading-[1] whitespace-nowrap"
+            >
+              <span class="italic font-light">→</span> {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-16 flex flex-col gap-3 text-[0.72rem] tracking-[0.22em] uppercase opacity-70">
+      <a href="mailto:contact@cliviaambroise.com">contact@cliviaambroise.com</a>
+      <a
+        href="https://www.instagram.com/cliviaambroise_photographie/"
+        target="_blank"
+        rel="noopener"
+      >
+        Instagram
+      </a>
+      <span>Bordeaux · Gironde</span>
+    </div>
+  </nav>
+</div>
+
 <script>
-  const nav = document.querySelector<HTMLElement>("[data-nav]");
-  if (nav) {
-    const isHome = location.pathname === "/";
+  const init = () => {
+    const nav = document.querySelector<HTMLElement>("[data-nav]");
+    if (!nav) return;
+    const isHome = nav.dataset.isHome === "true";
     let last = 0;
+    const lightCls = "text-[var(--color-bg)]";
+    const darkCls = "text-[var(--color-ink)]";
+    const bgScrolledCls = [
+      "bg-[color-mix(in_oklab,var(--color-bg)_82%,transparent)]",
+      "backdrop-blur-md",
+    ];
+
     const onScroll = () => {
       const y = window.scrollY;
       if (isHome) {
         if (y > 60) {
-          nav.classList.remove("bg-transparent");
-          nav.classList.add("bg-[color-mix(in_oklab,var(--color-bg)_82%,transparent)]", "backdrop-blur-md");
+          nav.classList.remove("bg-transparent", lightCls);
+          nav.classList.add(...bgScrolledCls, darkCls);
         } else {
-          nav.classList.add("bg-transparent");
-          nav.classList.remove("bg-[color-mix(in_oklab,var(--color-bg)_82%,transparent)]", "backdrop-blur-md");
+          nav.classList.add("bg-transparent", lightCls);
+          nav.classList.remove(...bgScrolledCls, darkCls);
         }
       }
       if (y > 120 && y > last) {
@@ -66,8 +164,55 @@ const items = [
       }
       last = y;
     };
-    nav.style.transition = "transform .5s cubic-bezier(.6,.05,.05,1), background .4s, backdrop-filter .4s";
+    nav.style.transition =
+      "transform .5s cubic-bezier(.6,.05,.05,1), background .4s, backdrop-filter .4s, color .4s";
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-  }
+
+    // Burger drawer
+    const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
+    const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+    const closeBtn = document.querySelector<HTMLButtonElement>("[data-burger-close]");
+    const lines = menu?.querySelectorAll<HTMLElement>("[data-menu-line] > a");
+    if (!burger || !menu) return;
+
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle("pointer-events-none", !open);
+      menu.classList.toggle("opacity-0", !open);
+      menu.classList.toggle("[clip-path:inset(0%_0%_100%_0%)]", !open);
+      menu.classList.toggle("[clip-path:inset(0%_0%_0%_0%)]", open);
+      menu.setAttribute("aria-hidden", open ? "false" : "true");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.style.overflow = open ? "hidden" : "";
+      window.__lenis?.[open ? "stop" : "start"]?.();
+
+      if (open && lines) {
+        lines.forEach((a, i) => {
+          a.style.transform = "translateY(110%)";
+          a.style.transition = "none";
+          requestAnimationFrame(() => {
+            a.style.transition = `transform 0.85s cubic-bezier(.7,.05,.05,1) ${0.1 + i * 0.07}s`;
+            a.style.transform = "translateY(0)";
+          });
+        });
+      } else if (lines) {
+        lines.forEach((a) => {
+          a.style.transition = "transform 0.4s ease";
+          a.style.transform = "translateY(110%)";
+        });
+      }
+    };
+
+    burger.addEventListener("click", () => setOpen(true));
+    closeBtn?.addEventListener("click", () => setOpen(false));
+    menu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false)),
+    );
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  };
+
+  init();
+  document.addEventListener("astro:page-load", init);
 </script>

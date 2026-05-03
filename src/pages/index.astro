@@ -5,8 +5,15 @@ import SplitScreen from "../components/sections/SplitScreen.astro";
 import AsymGrid from "../components/sections/AsymGrid.astro";
 import ProjectsTeaser from "../components/home/ProjectsTeaser.tsx";
 import LocationsStrip from "../components/home/LocationsStrip.tsx";
-import { projets, heroCandidates } from "../data/projets";
+import CarnetVoyageTeaser from "../components/home/CarnetVoyageTeaser.tsx";
+import { projets, heroCandidates, carnetVoyage } from "../data/projets";
 import { buildLocationCards } from "../lib/locations";
+
+const carnetSeries = carnetVoyage?.series.map((s) => ({
+  location: s.location,
+  image: s.images[0],
+  postCount: s.postCount,
+})) ?? [];
 
 const heroImage = heroCandidates[1] ?? heroCandidates[0] ?? projets[0]?.cover;
 const locations = buildLocationCards();
@@ -34,8 +41,8 @@ const filmGrid = projets
     subtitle="Architectes, agences, maîtres d'œuvre. Je photographie l'espace, la lumière et le détail — pour que vos projets soient vus comme vous les avez pensés."
   />
 
-  <section class="bg-[var(--color-bg)] px-6 py-24 md:px-10 md:py-32">
-    <div class="mx-auto grid max-w-[var(--container-wide)] gap-10 md:grid-cols-12">
+  <section class="bg-[var(--color-bg)] px-6 py-14 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-6 md:grid-cols-12 md:gap-10">
       <div class="md:col-span-3">
         <p class="eyebrow">— Studio</p>
       </div>
@@ -47,7 +54,7 @@ const filmGrid = projets
         </p>
         <a
           href="/projets"
-          class="mt-12 inline-block border-b border-[var(--color-ink)] pb-1 text-[0.78rem] tracking-[0.22em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+          class="mt-8 inline-block border-b border-[var(--color-ink)] pb-1 text-[0.78rem] tracking-[0.22em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] md:mt-12"
         >
           Découvrir le travail →
         </a>
@@ -85,6 +92,17 @@ const filmGrid = projets
 
   <LocationsStrip client:visible locations={locations} />
 
+  {carnetVoyage && (
+    <CarnetVoyageTeaser
+      client:visible
+      cover={carnetVoyage.images[1] ?? carnetVoyage.cover}
+      series={carnetSeries}
+      totalImages={carnetVoyage.imageCount}
+      yearStart={carnetVoyage.yearStart}
+      yearEnd={carnetVoyage.yearEnd}
+    />
+  )}
+
   <section
     class="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-bg)]"
   >
@@ -94,14 +112,14 @@ const filmGrid = projets
       loading="lazy"
       class="js-cursor-media absolute inset-0 -z-10 h-full w-full object-cover opacity-55"
     />
-    <div class="mx-auto max-w-[var(--container-wide)] px-6 py-32 md:px-10 md:py-48">
+    <div class="mx-auto max-w-[var(--container-wide)] px-6 py-20 md:px-10 md:py-48">
       <p class="eyebrow opacity-70" style="color: var(--color-bg);">— Contact</p>
       <h2
-        class="mt-6 max-w-3xl font-display text-5xl leading-[0.96] md:text-[clamp(3.5rem,7vw,7.5rem)]"
+        class="mt-5 max-w-3xl font-display text-5xl leading-[0.96] md:mt-6 md:text-[clamp(3.5rem,7vw,7.5rem)]"
       >
         Discutons de <span class="italic font-light">votre projet</span>.
       </h2>
-      <div class="mt-12 flex flex-col gap-6 md:flex-row md:items-center md:gap-12">
+      <div class="mt-8 flex flex-col gap-4 md:mt-12 md:flex-row md:items-center md:gap-12">
         <a
           href="mailto:contact@cliviaambroise.com"
           class="border-b border-[var(--color-bg)] pb-1 text-sm tracking-[0.2em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"

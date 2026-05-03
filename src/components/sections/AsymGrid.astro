@@ -13,32 +13,55 @@ const { images, variant = "60-40", className = "", altPrefix = "Photographie", s
 
 const safe = (i: number) => images[i % images.length];
 
-const layouts: Record<string, { ratio: ("16/9" | "4/5" | "3/4" | "1/1" | "21/9")[]; cols: string[] }> = {
+const layouts: Record<
+  string,
+  {
+    ratio: ("16/9" | "4/5" | "3/4" | "1/1" | "21/9")[];
+    cols: string[];
+    mobileWidth: string[];
+    mobileAlign: string[];
+  }
+> = {
   "60-40": {
     ratio: ["4/5", "3/4"],
     cols: ["md:col-span-7", "md:col-span-5"],
+    mobileWidth: ["w-full", "w-[94%]"],
+    mobileAlign: ["self-start", "self-end"],
   },
   "40-60": {
     ratio: ["3/4", "4/5"],
     cols: ["md:col-span-5", "md:col-span-7"],
+    mobileWidth: ["w-[94%]", "w-full"],
+    mobileAlign: ["self-start", "self-end"],
   },
   duo: {
     ratio: ["1/1", "1/1"],
     cols: ["md:col-span-6", "md:col-span-6"],
+    mobileWidth: ["w-[96%]", "w-[96%]"],
+    mobileAlign: ["self-start", "self-end"],
   },
   trio: {
     ratio: ["3/4", "4/5", "3/4"],
     cols: ["md:col-span-4", "md:col-span-4", "md:col-span-4"],
+    mobileWidth: ["w-full", "w-[94%]", "w-[96%]"],
+    mobileAlign: ["self-start", "self-end", "self-start"],
   },
 };
 
 const cfg = layouts[variant];
 ---
 
-<section class={`px-4 py-8 md:px-8 md:py-16 ${className}`}>
-  <div class="mx-auto grid max-w-[var(--container-wide)] grid-cols-1 gap-4 md:grid-cols-12 md:gap-6">
+<section class={`px-4 py-6 md:px-8 md:py-16 ${className}`}>
+  <div class="mx-auto flex max-w-[var(--container-wide)] flex-col gap-4 md:grid md:grid-cols-12 md:gap-6">
     {cfg.ratio.map((r, i) => (
-      <div class={cfg.cols[i]}>
+      <div
+        class:list={[
+          cfg.cols[i],
+          cfg.mobileWidth[i],
+          cfg.mobileAlign[i],
+          "md:w-auto md:self-auto",
+        ]}
+      >
         <ImageReveal
           src={safe(startIndex + i)}
           alt={`${altPrefix} ${startIndex + i + 1}`}

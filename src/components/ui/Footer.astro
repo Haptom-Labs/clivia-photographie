@@ -2,8 +2,8 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[var(--color-line)] bg-[var(--color-bg)] px-6 py-16 md:px-10">
-  <div class="mx-auto grid max-w-[var(--container-wide)] gap-12 md:grid-cols-12">
+<footer class="border-t border-[var(--color-line)] bg-[var(--color-bg)] px-6 py-12 md:px-10 md:py-16">
+  <div class="mx-auto grid max-w-[var(--container-wide)] gap-8 md:grid-cols-12 md:gap-12">
     <div class="md:col-span-5">
       <p class="eyebrow mb-3">Photographe d'architecture</p>
       <h3 class="font-display text-3xl md:text-5xl">Travaillons ensemble.</h3>
@@ -39,13 +39,14 @@ const year = new Date().getFullYear();
       <p class="eyebrow mb-3">Navigation</p>
       <nav class="flex flex-col gap-2 text-sm">
         <a href="/projets" class="hover:text-[var(--color-accent)]">Projets</a>
+        <a href="/carnet-de-voyage" class="hover:text-[var(--color-accent)]">Carnet de voyage</a>
         <a href="/a-propos" class="hover:text-[var(--color-accent)]">À propos</a>
         <a href="/contact" class="hover:text-[var(--color-accent)]">Contact</a>
       </nav>
     </div>
   </div>
 
-  <div class="mx-auto mt-16 flex max-w-[var(--container-wide)] flex-col gap-2 border-t border-[var(--color-line)] pt-6 text-xs text-[var(--color-mute)] md:flex-row md:items-center md:justify-between">
+  <div class="mx-auto mt-10 flex max-w-[var(--container-wide)] flex-col gap-2 border-t border-[var(--color-line)] pt-4 text-xs text-[var(--color-mute)] md:mt-16 md:pt-6 md:flex-row md:items-center md:justify-between">
     <p>© {year} Clivia Ambroise — Tous droits réservés</p>
     <p class="font-display italic tracking-tight">— L'architecture racontée par la lumière.</p>
   </div>

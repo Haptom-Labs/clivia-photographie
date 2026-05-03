@@ -62,7 +62,10 @@ export default function HeroFullBleed({
     return () => ctx.revert();
   }, []);
 
-  const heightCls = height === "tall" ? "min-h-[80svh]" : "min-h-[100svh]";
+  const heightCls =
+    height === "tall"
+      ? "min-h-[78svh] md:min-h-[80svh]"
+      : "min-h-[94svh] md:min-h-[100svh]";
 
   return (
     <section
@@ -80,7 +83,12 @@ export default function HeroFullBleed({
 
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-[rgba(14,14,12,0.45)] via-transparent to-[rgba(14,14,12,0.65)]" />
 
-      <div className="relative z-20 mx-auto w-full max-w-[var(--container-wide)] px-6 pb-14 md:px-10 md:pb-24">
+      <div
+        className="relative z-20 mx-auto w-full max-w-[var(--container-wide)] px-5 pb-10 md:px-10 md:pb-24"
+        style={{
+          paddingBottom: "max(3.5rem, env(safe-area-inset-bottom, 0px))",
+        }}
+      >
         {eyebrow && (
           <p
             className="eyebrow opacity-75"
@@ -91,7 +99,7 @@ export default function HeroFullBleed({
         )}
         <h1
           ref={titleRef}
-          className="mt-5 font-display text-5xl leading-[0.92] tracking-[-0.015em] md:text-[clamp(4.5rem,10vw,9.5rem)]"
+          className="mt-5 font-display leading-[0.9] tracking-[-0.018em] text-[clamp(3.6rem,18vw,5.4rem)] md:text-[clamp(4.5rem,10vw,9.5rem)]"
         >
           <span className="block overflow-hidden">
             <span className="js-hero-line block">{titleTop}</span>
@@ -103,7 +111,7 @@ export default function HeroFullBleed({
           </span>
         </h1>
         {subtitle && (
-          <p className="mt-7 max-w-md text-sm leading-relaxed opacity-80 md:text-[0.95rem]">
+          <p className="mt-7 max-w-md text-[0.92rem] leading-relaxed opacity-85 md:text-[0.95rem]">
             {subtitle}
           </p>
         )}

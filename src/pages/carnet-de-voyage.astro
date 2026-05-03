@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroFullBleed from "../components/sections/HeroFullBleed.tsx";
+import LookbookSection from "../components/projet/LookbookSection.astro";
+import { carnetVoyage, projets } from "../data/projets";
+
+if (!carnetVoyage) {
+  return Astro.redirect("/");
+}
+
+const heroImage = carnetVoyage.images[1] ?? carnetVoyage.cover;
+const yearRange =
+  carnetVoyage.yearStart === carnetVoyage.yearEnd
+    ? `${carnetVoyage.yearStart}`
+    : `${carnetVoyage.yearStart} – ${carnetVoyage.yearEnd}`;
+const next = projets[0];
+---
+
+<BaseLayout
+  title="Carnet de voyage — Clivia Ambroise"
+  description="Notes visuelles personnelles. Pouilles, Châteaux de la Loire — l'œil hors commande."
+  ogImage={carnetVoyage.cover}
+>
+  <HeroFullBleed
+    client:load
+    image={heroImage}
+    alt="Carnet de voyage — Clivia Ambroise"
+    eyebrow="— Personnel"
+    titleTop="Carnet"
+    titleBottom="de voyage"
+    subtitle="Quand l'œil ne travaille pas pour les autres. Notes visuelles glanées entre deux reportages, en Italie, sur la Loire, ailleurs."
+    height="tall"
+  />
+
+  <section class="bg-[var(--color-bg)] px-6 py-12 md:px-10 md:py-32">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-8 md:grid-cols-12 md:gap-10">
+      <div class="md:col-span-3">
+        <p class="eyebrow">— Hors commande</p>
+      </div>
+      <div class="md:col-span-9 grid gap-10 md:grid-cols-3">
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Statut</p>
+          <p class="mt-2 font-display text-2xl">Personnel</p>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Lieux</p>
+          <ul class="mt-2 flex flex-col gap-1 font-display text-2xl">
+            {carnetVoyage.locations.map((l) => <li>{l}</li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Période</p>
+          <p class="mt-2 font-display text-2xl">{yearRange}</p>
+          <p class="mt-1 text-sm text-[var(--color-mute)]">
+            {carnetVoyage.imageCount} photographies
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {carnetVoyage.series.map((s, i) => (
+    <LookbookSection series={s} index={i} client="Voyage personnel" />
+  ))}
+
+  <section
+    class="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-bg)]"
+  >
+    <img
+      src={next.cover}
+      alt=""
+      loading="lazy"
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
+    />
+    <a
+      href={`/projets/${next.slug}`}
+      data-cursor="link"
+      class="block px-6 py-20 md:px-10 md:py-48"
+    >
+      <div class="mx-auto max-w-[var(--container-wide)]">
+        <p class="eyebrow opacity-70" style="color: var(--color-bg);">
+          Retour au travail
+        </p>
+        <h2 class="mt-6 font-display text-5xl leading-[0.96] md:text-[clamp(3rem,7vw,7rem)]">
+          {next.title} <span class="italic font-light">→</span>
+        </h2>
+        <p class="mt-6 text-sm opacity-70">{next.locations.join(" · ")}</p>
+      </div>
+    </a>
+  </section>
+</BaseLayout>
