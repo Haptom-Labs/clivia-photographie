@@ -232,7 +232,7 @@ export const projets: Projet[] = [
     ],
     "yearStart": 2024,
     "yearEnd": 2025,
-    "cover": "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
+    "cover": "/images/projets/brochetrose-architecture/3701883773011951169.jpg",
     "imageCount": 73,
     "images": [
       "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
@@ -413,7 +413,7 @@ export const projets: Projet[] = [
     ],
     "yearStart": 2025,
     "yearEnd": 2025,
-    "cover": "/images/projets/florentine-du-chazaud/001_florentine-du-chazaud.jpg",
+    "cover": "/images/projets/florentine-du-chazaud/3774561766215576925_3774561756971295449.jpg",
     "imageCount": 36,
     "images": [
       "/images/projets/florentine-du-chazaud/001_florentine-du-chazaud.jpg",
@@ -511,7 +511,7 @@ export const projets: Projet[] = [
     ],
     "yearStart": 2025,
     "yearEnd": 2026,
-    "cover": "/images/projets/dgot/001_dgot.jpg",
+    "cover": "/images/projets/dgot/3772340301009311289.jpg",
     "imageCount": 18,
     "images": [
       "/images/projets/dgot/001_dgot.jpg",
