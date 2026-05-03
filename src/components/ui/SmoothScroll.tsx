@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 declare global {
   interface Window {
@@ -19,15 +23,14 @@ export default function SmoothScroll() {
     });
     window.__lenis = lenis;
 
-    let rafId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
+    // Bridge Lenis ↔ ScrollTrigger : sync obligatoire sinon animations désynchronisées du scroll smooth
+    lenis.on("scroll", ScrollTrigger.update);
+    const tickerCb = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tickerCb);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tickerCb);
       lenis.destroy();
       window.__lenis = undefined;
     };

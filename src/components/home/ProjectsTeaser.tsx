@@ -18,16 +18,15 @@ export default function ProjectsTeaser({ projets }: Props) {
       const cards = ref.current?.querySelectorAll<HTMLAnchorElement>("[data-card]");
       cards?.forEach((card, idx) => {
         gsap.from(card, {
-          y: 80,
+          y: 40,
           opacity: 0,
-          duration: 1.1,
-          ease: "expo.out",
-          delay: idx * 0.08,
+          duration: 0.9,
+          ease: "power2.out",
+          delay: idx * 0.06,
           immediateRender: false,
-          clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: card,
-            start: "top 90%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         });
@@ -36,19 +35,14 @@ export default function ProjectsTeaser({ projets }: Props) {
         if (!img) return;
 
         card.addEventListener("pointerenter", () => {
-          gsap.to(img, { scale: 1.05, duration: 0.9, ease: "power3.out" });
+          gsap.to(img, { scale: 1.04, duration: 0.9, ease: "power3.out" });
         });
         card.addEventListener("pointerleave", () => {
           gsap.to(img, { scale: 1, duration: 1, ease: "power3.out" });
         });
       });
-      ScrollTrigger.refresh();
     }, ref);
-    const t = setTimeout(() => ScrollTrigger.refresh(), 100);
-    return () => {
-      clearTimeout(t);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -119,9 +113,9 @@ export default function ProjectsTeaser({ projets }: Props) {
                 <img
                   src={p.cover}
                   alt={`${p.title} — ${p.locations.join(", ")}`}
-                  loading="eager"
+                  loading={idx === 0 ? "eager" : "lazy"}
                   decoding="async"
-                  fetchPriority={idx === 0 || idx === 3 ? "high" : "auto"}
+                  fetchPriority={idx === 0 ? "high" : "auto"}
                   className="absolute inset-0 h-full w-full object-cover will-change-transform"
                 />
 
