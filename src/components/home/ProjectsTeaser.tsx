@@ -65,7 +65,7 @@ export default function ProjectsTeaser({ projets }: Props) {
           </a>
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-x-8 md:gap-y-6">
+        <div ref={ref} className="grid grid-cols-2 gap-3 md:grid-cols-12 md:gap-x-8 md:gap-y-6">
           {(() => {
             const DISPLAY_ORDER = [
               "agence-dame",
@@ -80,24 +80,28 @@ export default function ProjectsTeaser({ projets }: Props) {
           })().map((p, idx) => {
             const layouts = [
               {
-                desktop: "md:col-span-7 md:row-span-2",
+                // Card 1 (Agence Dame): mobile = pleine largeur portrait, desktop = grande verticale gauche
+                desktop: "col-span-2 md:col-span-7 md:row-span-2",
                 aspect: "aspect-[4/5] md:aspect-[3/5]",
                 translate: "",
               },
               {
-                desktop: "md:col-span-5",
-                aspect: "aspect-[1/1] md:aspect-[4/5]",
+                // Card 2 (DGOT): mobile = demi-largeur portrait, desktop = haut-droite
+                desktop: "col-span-1 md:col-span-5",
+                aspect: "aspect-[3/4] md:aspect-[4/5]",
                 translate: "md:translate-y-8",
               },
               {
-                desktop: "md:col-span-5",
+                // Card 3 (Florentine): mobile = demi-largeur portrait, desktop = bas-droite
+                desktop: "col-span-1 md:col-span-5",
                 aspect: "aspect-[3/4] md:aspect-[1/1]",
                 translate: "",
               },
               {
-                desktop: "md:col-span-12",
-                aspect: "aspect-[16/11] md:aspect-[21/9]",
-                translate: "min-h-[200px] md:min-h-[480px]",
+                // Card 4 (Brochet Rose): mobile = bannière landscape pleine largeur, desktop = bannière 21/9
+                desktop: "col-span-2 md:col-span-12",
+                aspect: "aspect-[16/10] md:aspect-[21/9]",
+                translate: "md:min-h-[480px]",
               },
             ];
             const cfg = layouts[idx % layouts.length];
