@@ -17,22 +17,20 @@ export default function ProjectsTeaser({ projets }: Props) {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const cards = ref.current?.querySelectorAll<HTMLAnchorElement>("[data-card]");
       cards?.forEach((card, idx) => {
-        gsap.fromTo(
-          card,
-          { y: 80, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.1,
-            ease: "expo.out",
-            delay: idx * 0.08,
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-              toggleActions: "play none none none",
-            },
+        gsap.from(card, {
+          y: 80,
+          opacity: 0,
+          duration: 1.1,
+          ease: "expo.out",
+          delay: idx * 0.08,
+          immediateRender: false,
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none none",
           },
-        );
+        });
 
         const img = card.querySelector("img");
         if (!img) return;
@@ -44,8 +42,13 @@ export default function ProjectsTeaser({ projets }: Props) {
           gsap.to(img, { scale: 1, duration: 1, ease: "power3.out" });
         });
       });
+      ScrollTrigger.refresh();
     }, ref);
-    return () => ctx.revert();
+    const t = setTimeout(() => ScrollTrigger.refresh(), 100);
+    return () => {
+      clearTimeout(t);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -88,7 +91,7 @@ export default function ProjectsTeaser({ projets }: Props) {
               {
                 desktop: "md:col-span-12",
                 aspect: "aspect-[16/11] md:aspect-[21/9]",
-                translate: "",
+                translate: "min-h-[200px] md:min-h-[480px]",
               },
             ];
             const cfg = layouts[idx % layouts.length];
@@ -105,7 +108,9 @@ export default function ProjectsTeaser({ projets }: Props) {
                 <img
                   src={p.cover}
                   alt={`${p.title} — ${p.locations.join(", ")}`}
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority={idx === 0 || idx === 3 ? "high" : "auto"}
                   className="absolute inset-0 h-full w-full object-cover will-change-transform"
                 />
 
