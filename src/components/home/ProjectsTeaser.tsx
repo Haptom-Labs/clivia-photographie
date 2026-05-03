@@ -71,7 +71,18 @@ export default function ProjectsTeaser({ projets }: Props) {
         </div>
 
         <div ref={ref} className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-x-8 md:gap-y-6">
-          {projets.map((p, idx) => {
+          {(() => {
+            const DISPLAY_ORDER = [
+              "agence-dame",
+              "dgot",
+              "florentine-du-chazaud",
+              "brochetrose-architecture",
+            ];
+            const ordered = DISPLAY_ORDER
+              .map((slug) => projets.find((p) => p.slug === slug))
+              .filter((p): p is Projet => Boolean(p));
+            return ordered;
+          })().map((p, idx) => {
             const layouts = [
               {
                 desktop: "md:col-span-7 md:row-span-2",
