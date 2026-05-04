@@ -165,7 +165,10 @@ const LOCATION_DISPLAY = {
   "cap-ferret": "Cap Ferret",
 };
 
-function fallbackDescription(agenceName, locationDisplay) {
+function fallbackDescription(agenceName, locationDisplay, monthLine) {
+  if (monthLine) {
+    return `Reportage photographique d'un chantier livre en ${monthLine} a ${locationDisplay} pour l'agence ${agenceName}. Une lecture sensible du projet, du chantier livre au detail.`;
+  }
   return `Selection de reportages photographies a ${locationDisplay} pour l'agence ${agenceName}. Une lecture sensible des projets, du chantier livre au detail.`;
 }
 
@@ -177,6 +180,48 @@ function parseLocation(desc) {
     if (t.startsWith("|")) return t.replace(/^\|\s*/, "").trim();
   }
   return null;
+}
+
+// Apres la ligne lieu (qui commence par "|"), la ligne suivante non-vide non-separateur
+// est typiquement le mois de chantier (ex. "Mars 2024", "Juillet 2025").
+function parseChantierMonth(desc) {
+  const lines = (desc || "").split("\n").map((l) => l.trim());
+  let foundLocation = false;
+  for (const line of lines) {
+    if (line.startsWith("|")) {
+      foundLocation = true;
+      continue;
+    }
+    if (!foundLocation) continue;
+    if (!line) continue;
+    if (line.startsWith("—") || line.startsWith("#") || line.startsWith("@")) continue;
+    return line;
+  }
+  return null;
+}
+
+function monthToSlug(month) {
+  if (!month) return null;
+  return stripDiacritics(month)
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+function yearFromMonth(month) {
+  if (!month) return null;
+  const m = month.match(/(\d{4})/);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+const MONTH_ORDER = {
+  janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6,
+  juillet: 7, aout: 8, septembre: 9, octobre: 10, novembre: 11, decembre: 12,
+};
+function monthIndex(monthLine) {
+  if (!monthLine) return 99;
+  const m = stripDiacritics(monthLine.toLowerCase()).match(/^(\w+)/);
+  return m && MONTH_ORDER[m[1]] ? MONTH_ORDER[m[1]] : 99;
 }
 
 function detectAgences(desc) {
@@ -232,6 +277,8 @@ async function main() {
       continue;
     }
 
+    const chantierMonth = parseChantierMonth(d.description);
+
     posts.push({
       post_id: d.post_id,
       url: d.post_url,
@@ -240,6 +287,8 @@ async function main() {
       agences: agencesDetected,
       lieu_raw: lieuRaw,
       lieu_slug: lieuSlug,
+      chantier_month: chantierMonth,
+      chantier_year: yearFromMonth(chantierMonth),
       caption: (d.description || "").trim(),
       jpg_files: allFiles,
     });
@@ -317,11 +366,14 @@ async function main() {
         };
       } else {
         const locSlug = p.lieu_slug || "autres";
-        projetSlug = `${locSlug}-selection`;
+        const monthSlug = monthToSlug(p.chantier_month);
+        projetSlug = monthSlug ? `${locSlug}-${monthSlug}` : `${locSlug}-selection`;
         projetMeta = {
           source: "fallback",
           location: p.lieu_raw,
           locationSlug: locSlug,
+          chantierMonth: p.chantier_month,
+          chantierYear: p.chantier_year,
         };
       }
 
@@ -359,6 +411,13 @@ async function main() {
         const order = Object.keys(BROCHETROSE_SUBPROJECTS);
         return order.indexOf(a[0]) - order.indexOf(b[0]);
       }
+      // Fallback : tri chronologique par chantier (annee asc, mois asc)
+      const yearA = a[1].meta.chantierYear || 9999;
+      const yearB = b[1].meta.chantierYear || 9999;
+      if (yearA !== yearB) return yearA - yearB;
+      const mA = monthIndex(a[1].meta.chantierMonth);
+      const mB = monthIndex(b[1].meta.chantierMonth);
+      if (mA !== mB) return mA - mB;
       return a[0].localeCompare(b[0]);
     });
 
@@ -410,16 +469,22 @@ async function main() {
       } else {
         location = projetData.meta.location || "Sans lieu";
         locationSlug = projetData.meta.locationSlug;
-        title = `Selection ${LOCATION_DISPLAY[locationSlug] ?? location}`;
-        description = fallbackDescription(agence.name, LOCATION_DISPLAY[locationSlug] ?? location);
+        const locDisplay = LOCATION_DISPLAY[locationSlug] ?? location;
+        const monthLine = projetData.meta.chantierMonth;
+        title = monthLine ? `${locDisplay} — ${monthLine}` : `Selection ${locDisplay}`;
+        description = fallbackDescription(agence.name, locDisplay, monthLine);
       }
 
       const years = sortedPosts.map((p) => p.year).filter(Boolean);
       const computedYear = years.length ? Math.max(...years) : null;
-      const projetYear =
-        projetData.meta.source === "descriptive" && projetData.meta.conf.year
-          ? projetData.meta.conf.year
-          : computedYear;
+      let projetYear;
+      if (projetData.meta.source === "descriptive" && projetData.meta.conf.year) {
+        projetYear = projetData.meta.conf.year;
+      } else if (projetData.meta.source === "fallback" && projetData.meta.chantierYear) {
+        projetYear = projetData.meta.chantierYear;
+      } else {
+        projetYear = computedYear;
+      }
       const projet = {
         slug: projetSlug,
         title,

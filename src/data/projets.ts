@@ -259,12 +259,12 @@ export const agences: Agence[] = [
         "imageCount": 6
       },
       {
-        "slug": "bordeaux-selection",
-        "title": "Selection Bordeaux",
+        "slug": "bordeaux-mars-2024",
+        "title": "Bordeaux — Mars 2024",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
-        "year": 2025,
-        "description": "Selection de reportages photographies a Bordeaux pour l'agence Brochet Rose. Une lecture sensible des projets, du chantier livre au detail.",
+        "year": 2024,
+        "description": "Reportage photographique d'un chantier livre en Mars 2024 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
         "cover": "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
@@ -272,7 +272,19 @@ export const agences: Agence[] = [
           "/images/projets/brochetrose-architecture/003_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/004_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/005_brochetrose-architecture.jpg",
-          "/images/projets/brochetrose-architecture/006_brochetrose-architecture.jpg",
+          "/images/projets/brochetrose-architecture/006_brochetrose-architecture.jpg"
+        ],
+        "imageCount": 6
+      },
+      {
+        "slug": "bordeaux-juin-2024",
+        "title": "Bordeaux — Juin 2024",
+        "location": "Bordeaux",
+        "locationSlug": "bordeaux",
+        "year": 2024,
+        "description": "Reportage photographique d'un chantier livre en Juin 2024 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "cover": "/images/projets/brochetrose-architecture/007_brochetrose-architecture.jpg",
+        "images": [
           "/images/projets/brochetrose-architecture/007_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/008_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/009_brochetrose-architecture.jpg",
@@ -280,7 +292,19 @@ export const agences: Agence[] = [
           "/images/projets/brochetrose-architecture/011_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/012_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/013_brochetrose-architecture.jpg",
-          "/images/projets/brochetrose-architecture/014_brochetrose-architecture.jpg",
+          "/images/projets/brochetrose-architecture/014_brochetrose-architecture.jpg"
+        ],
+        "imageCount": 8
+      },
+      {
+        "slug": "bordeaux-juillet-2024",
+        "title": "Bordeaux — Juillet 2024",
+        "location": "Bordeaux",
+        "locationSlug": "bordeaux",
+        "year": 2024,
+        "description": "Reportage photographique d'un chantier livre en Juillet 2024 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "cover": "/images/projets/brochetrose-architecture/015_brochetrose-architecture.jpg",
+        "images": [
           "/images/projets/brochetrose-architecture/015_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/016_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/017_brochetrose-architecture.jpg",
@@ -309,7 +333,19 @@ export const agences: Agence[] = [
           "/images/projets/brochetrose-architecture/040_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/041_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/042_brochetrose-architecture.jpg",
-          "/images/projets/brochetrose-architecture/043_brochetrose-architecture.jpg",
+          "/images/projets/brochetrose-architecture/043_brochetrose-architecture.jpg"
+        ],
+        "imageCount": 29
+      },
+      {
+        "slug": "cap-ferret-juillet-2024",
+        "title": "Cap Ferret — Juillet 2024",
+        "location": "Cap Ferret",
+        "locationSlug": "cap-ferret",
+        "year": 2024,
+        "description": "Reportage photographique d'un chantier livre en Juillet 2024 a Cap Ferret pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "cover": "/images/projets/brochetrose-architecture/044_brochetrose-architecture.jpg",
+        "images": [
           "/images/projets/brochetrose-architecture/044_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/045_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/046_brochetrose-architecture.jpg",
@@ -318,19 +354,7 @@ export const agences: Agence[] = [
           "/images/projets/brochetrose-architecture/049_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/050_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/051_brochetrose-architecture.jpg",
-          "/images/projets/brochetrose-architecture/052_brochetrose-architecture.jpg"
-        ],
-        "imageCount": 52
-      },
-      {
-        "slug": "cap-ferret-selection",
-        "title": "Selection Cap Ferret",
-        "location": "Cap Ferret",
-        "locationSlug": "cap-ferret",
-        "year": 2025,
-        "description": "Selection de reportages photographies a Cap Ferret pour l'agence Brochet Rose. Une lecture sensible des projets, du chantier livre au detail.",
-        "cover": "/images/projets/brochetrose-architecture/053_brochetrose-architecture.jpg",
-        "images": [
+          "/images/projets/brochetrose-architecture/052_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/053_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/054_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/055_brochetrose-architecture.jpg",
@@ -342,7 +366,19 @@ export const agences: Agence[] = [
           "/images/projets/brochetrose-architecture/061_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/062_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/063_brochetrose-architecture.jpg",
-          "/images/projets/brochetrose-architecture/064_brochetrose-architecture.jpg",
+          "/images/projets/brochetrose-architecture/064_brochetrose-architecture.jpg"
+        ],
+        "imageCount": 21
+      },
+      {
+        "slug": "bordeaux-avril-2025",
+        "title": "Bordeaux — Avril 2025",
+        "location": "Bordeaux",
+        "locationSlug": "bordeaux",
+        "year": 2025,
+        "description": "Reportage photographique d'un chantier livre en Avril 2025 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "cover": "/images/projets/brochetrose-architecture/065_brochetrose-architecture.jpg",
+        "images": [
           "/images/projets/brochetrose-architecture/065_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/066_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/067_brochetrose-architecture.jpg",
@@ -353,7 +389,7 @@ export const agences: Agence[] = [
           "/images/projets/brochetrose-architecture/072_brochetrose-architecture.jpg",
           "/images/projets/brochetrose-architecture/073_brochetrose-architecture.jpg"
         ],
-        "imageCount": 21
+        "imageCount": 9
       }
     ]
   },
@@ -372,12 +408,12 @@ export const agences: Agence[] = [
     "imageCountTotal": 75,
     "projects": [
       {
-        "slug": "bordeaux-selection",
-        "title": "Selection Bordeaux",
+        "slug": "bordeaux-fevrier-2025",
+        "title": "Bordeaux — Février 2025",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Selection de reportages photographies a Bordeaux pour l'agence Agence Dame. Une lecture sensible des projets, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livre en Février 2025 a Bordeaux pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livre au detail.",
         "cover": "/images/projets/agence-dame/001_agence-dame.jpg",
         "images": [
           "/images/projets/agence-dame/001_agence-dame.jpg",
@@ -395,12 +431,12 @@ export const agences: Agence[] = [
         "imageCount": 11
       },
       {
-        "slug": "castres-sur-gironde-selection",
-        "title": "Selection Castres-sur-Gironde",
+        "slug": "castres-sur-gironde-juillet-2025",
+        "title": "Castres-sur-Gironde — Juillet 2025",
         "location": "Castres sur Gironde",
         "locationSlug": "castres-sur-gironde",
-        "year": 2026,
-        "description": "Selection de reportages photographies a Castres-sur-Gironde pour l'agence Agence Dame. Une lecture sensible des projets, du chantier livre au detail.",
+        "year": 2025,
+        "description": "Reportage photographique d'un chantier livre en Juillet 2025 a Castres-sur-Gironde pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livre au detail.",
         "cover": "/images/projets/agence-dame/012_agence-dame.jpg",
         "images": [
           "/images/projets/agence-dame/012_agence-dame.jpg",
@@ -435,12 +471,12 @@ export const agences: Agence[] = [
         "imageCount": 28
       },
       {
-        "slug": "saint-emilion-selection",
-        "title": "Selection Saint-Emilion",
+        "slug": "saint-emilion-juillet-2025",
+        "title": "Saint-Emilion — Juillet 2025",
         "location": "Saint Émilion",
         "locationSlug": "saint-emilion",
-        "year": 2026,
-        "description": "Selection de reportages photographies a Saint-Emilion pour l'agence Agence Dame. Une lecture sensible des projets, du chantier livre au detail.",
+        "year": 2025,
+        "description": "Reportage photographique d'un chantier livre en Juillet 2025 a Saint-Emilion pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livre au detail.",
         "cover": "/images/projets/agence-dame/040_agence-dame.jpg",
         "images": [
           "/images/projets/agence-dame/040_agence-dame.jpg",
@@ -497,12 +533,12 @@ export const agences: Agence[] = [
     "imageCountTotal": 36,
     "projects": [
       {
-        "slug": "bordeaux-selection",
-        "title": "Selection Bordeaux",
+        "slug": "bordeaux-octobre-2024",
+        "title": "Bordeaux — Octobre 2024",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
-        "year": 2025,
-        "description": "Selection de reportages photographies a Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible des projets, du chantier livre au detail.",
+        "year": 2024,
+        "description": "Reportage photographique d'un chantier livre en Octobre 2024 a Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible du projet, du chantier livre au detail.",
         "cover": "/images/projets/florentine-du-chazaud/001_florentine-du-chazaud.jpg",
         "images": [
           "/images/projets/florentine-du-chazaud/001_florentine-du-chazaud.jpg",
@@ -510,7 +546,19 @@ export const agences: Agence[] = [
           "/images/projets/florentine-du-chazaud/003_florentine-du-chazaud.jpg",
           "/images/projets/florentine-du-chazaud/004_florentine-du-chazaud.jpg",
           "/images/projets/florentine-du-chazaud/005_florentine-du-chazaud.jpg",
-          "/images/projets/florentine-du-chazaud/006_florentine-du-chazaud.jpg",
+          "/images/projets/florentine-du-chazaud/006_florentine-du-chazaud.jpg"
+        ],
+        "imageCount": 6
+      },
+      {
+        "slug": "bordeaux-juin-2025",
+        "title": "Bordeaux — Juin 2025",
+        "location": "Bordeaux",
+        "locationSlug": "bordeaux",
+        "year": 2025,
+        "description": "Reportage photographique d'un chantier livre en Juin 2025 a Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible du projet, du chantier livre au detail.",
+        "cover": "/images/projets/florentine-du-chazaud/007_florentine-du-chazaud.jpg",
+        "images": [
           "/images/projets/florentine-du-chazaud/007_florentine-du-chazaud.jpg",
           "/images/projets/florentine-du-chazaud/008_florentine-du-chazaud.jpg",
           "/images/projets/florentine-du-chazaud/009_florentine-du-chazaud.jpg",
@@ -542,7 +590,7 @@ export const agences: Agence[] = [
           "/images/projets/florentine-du-chazaud/035_florentine-du-chazaud.jpg",
           "/images/projets/florentine-du-chazaud/036_florentine-du-chazaud.jpg"
         ],
-        "imageCount": 36
+        "imageCount": 30
       }
     ]
   },
@@ -559,12 +607,12 @@ export const agences: Agence[] = [
     "imageCountTotal": 18,
     "projects": [
       {
-        "slug": "bordeaux-selection",
-        "title": "Selection Bordeaux",
+        "slug": "bordeaux-avril-2025",
+        "title": "Bordeaux — Avril 2025",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
-        "year": 2026,
-        "description": "Selection de reportages photographies a Bordeaux pour l'agence DGOT. Une lecture sensible des projets, du chantier livre au detail.",
+        "year": 2025,
+        "description": "Reportage photographique d'un chantier livre en Avril 2025 a Bordeaux pour l'agence DGOT. Une lecture sensible du projet, du chantier livre au detail.",
         "cover": "/images/projets/dgot/001_dgot.jpg",
         "images": [
           "/images/projets/dgot/001_dgot.jpg",
@@ -575,7 +623,19 @@ export const agences: Agence[] = [
           "/images/projets/dgot/006_dgot.jpg",
           "/images/projets/dgot/007_dgot.jpg",
           "/images/projets/dgot/008_dgot.jpg",
-          "/images/projets/dgot/009_dgot.jpg",
+          "/images/projets/dgot/009_dgot.jpg"
+        ],
+        "imageCount": 9
+      },
+      {
+        "slug": "bordeaux-juillet-2025",
+        "title": "Bordeaux — Juillet 2025",
+        "location": "Bordeaux",
+        "locationSlug": "bordeaux",
+        "year": 2025,
+        "description": "Reportage photographique d'un chantier livre en Juillet 2025 a Bordeaux pour l'agence DGOT. Une lecture sensible du projet, du chantier livre au detail.",
+        "cover": "/images/projets/dgot/010_dgot.jpg",
+        "images": [
           "/images/projets/dgot/010_dgot.jpg",
           "/images/projets/dgot/011_dgot.jpg",
           "/images/projets/dgot/012_dgot.jpg",
@@ -586,7 +646,7 @@ export const agences: Agence[] = [
           "/images/projets/dgot/017_dgot.jpg",
           "/images/projets/dgot/018_dgot.jpg"
         ],
-        "imageCount": 18
+        "imageCount": 9
       }
     ]
   }
