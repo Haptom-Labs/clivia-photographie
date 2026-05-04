@@ -52,11 +52,11 @@ export const agences: Agence[] = [
   {
     "slug": "brochet-rose",
     "name": "Brochet Rose",
-    "blurb": "Maisons et residences singulieres, de Saint-Emilion au Cap-Ferret.",
+    "blurb": "Maisons et résidences singulières, de Saint-Émilion au Cap-Ferret.",
     "cover": "/images/projets/brochetrose-architecture/3481383345251303791_3481383330873131302.jpg",
     "locations": [
       "Bordeaux",
-      "Cap Ferret"
+      "Cap-Ferret"
     ],
     "yearStart": 2024,
     "yearEnd": 2025,
@@ -64,11 +64,11 @@ export const agences: Agence[] = [
     "projects": [
       {
         "slug": "bordeaux-maison-surelevation",
-        "title": "Maison renovee et surelevee",
+        "title": "Maison rénovée et surélevée",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Rehabilitation contemporaine d'une maison bordelaise. Surelevation et redistribution complete des volumes interieurs, lecture precise des materiaux et de la lumiere.",
+        "description": "Réhabilitation contemporaine d'une maison bordelaise. Surélévation et redistribution complète des volumes intérieurs, lecture précise des matériaux et de la lumière.",
         "cover": "/images/projets/brochetrose-architecture/instagram/3886533820526917875_3886533772653114351.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/instagram/3886533820526917875_3886533772653114351.jpg",
@@ -126,11 +126,11 @@ export const agences: Agence[] = [
       },
       {
         "slug": "bordeaux-maison-individuelle",
-        "title": "Maison individuelle renovee",
+        "title": "Maison individuelle rénovée",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Renovation d'une maison individuelle a Bordeaux. Volumes recomposes, ouvertures genereuses, attention portee aux finitions et a la lumiere naturelle.",
+        "description": "Rénovation d'une maison individuelle à Bordeaux. Volumes recomposés, ouvertures généreuses, attention portée aux finitions et à la lumière naturelle.",
         "cover": "/images/projets/brochetrose-architecture/instagram/3811184325593696660_3811184317641267400.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/instagram/3811184325593696660_3811184317641267400.jpg",
@@ -169,11 +169,11 @@ export const agences: Agence[] = [
       },
       {
         "slug": "cap-ferret-villa",
-        "title": "Villa renovee et etendue",
-        "location": "Cap Ferret",
+        "title": "Villa rénovée et étendue",
+        "location": "Cap-Ferret",
         "locationSlug": "cap-ferret",
         "year": 2025,
-        "description": "Renovation et extension d'une villa au Cap-Ferret, dans le respect du caractere du lieu. Travail sur les vues, les terrasses et les interieurs.",
+        "description": "Rénovation et extension d'une villa au Cap-Ferret, dans le respect du caractère du lieu. Travail sur les vues, les terrasses et les intérieurs.",
         "cover": "/images/projets/brochetrose-architecture/instagram/3474142509799303890_3474142495513450323.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/instagram/3474142509799303890_3474142495513450323.jpg",
@@ -201,7 +201,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Maison contemporaine en bord de bassin signee Brochet Rose. Reportage sur les volumes, la lumiere, et le rapport au paysage.",
+        "description": "Maison contemporaine en bord de bassin signée Brochet Rose. Reportage sur les volumes, la lumière, et le rapport au paysage.",
         "cover": "/images/projets/brochetrose-architecture/instagram/3701324683370260585.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/instagram/3701324683370260585.jpg",
@@ -220,11 +220,11 @@ export const agences: Agence[] = [
       },
       {
         "slug": "bordeaux-etude-notariale-dgot",
-        "title": "Etude notariale (avec DGOT)",
+        "title": "Étude notariale (avec DGOT)",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Renovation d'une etude notariale bordelaise en partenariat avec l'agence DGOT. Espaces de travail, lumiere naturelle, mobilier.",
+        "description": "Rénovation d'une étude notariale bordelaise en partenariat avec l'agence DGOT. Espaces de travail, lumière naturelle, mobilier.",
         "cover": "/images/projets/brochetrose-architecture/instagram/3772339793725002734.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/instagram/3772339793725002734.jpg",
@@ -242,11 +242,11 @@ export const agences: Agence[] = [
       },
       {
         "slug": "bordeaux-appartement",
-        "title": "Appartement renove",
+        "title": "Appartement rénové",
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Rehabilitation d'un appartement bordelais. Intervention sobre et precise sur les volumes, la lumiere et les finitions.",
+        "description": "Réhabilitation d'un appartement bordelais. Intervention sobre et précise sur les volumes, la lumière et les finitions.",
         "cover": "/images/projets/brochetrose-architecture/instagram/3349475440445825508_3349475427124608718.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/instagram/3349475440445825508_3349475427124608718.jpg",
@@ -264,7 +264,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Reportage photographique d'un chantier livre en Mars 2024 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Mars 2024 à Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/001_brochetrose-architecture.jpg",
@@ -282,7 +282,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Reportage photographique d'un chantier livre en Juin 2024 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juin 2024 à Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/brochetrose-architecture/007_brochetrose-architecture.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/007_brochetrose-architecture.jpg",
@@ -302,7 +302,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Reportage photographique d'un chantier livre en Juillet 2024 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juillet 2024 à Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/brochetrose-architecture/015_brochetrose-architecture.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/015_brochetrose-architecture.jpg",
@@ -339,11 +339,11 @@ export const agences: Agence[] = [
       },
       {
         "slug": "cap-ferret-juillet-2024",
-        "title": "Cap Ferret — Juillet 2024",
-        "location": "Cap Ferret",
+        "title": "Cap-Ferret — Juillet 2024",
+        "location": "Cap-Ferret",
         "locationSlug": "cap-ferret",
         "year": 2024,
-        "description": "Reportage photographique d'un chantier livre en Juillet 2024 a Cap Ferret pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juillet 2024 à Cap-Ferret pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/brochetrose-architecture/044_brochetrose-architecture.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/044_brochetrose-architecture.jpg",
@@ -376,7 +376,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Avril 2025 a Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Avril 2025 à Bordeaux pour l'agence Brochet Rose. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/brochetrose-architecture/065_brochetrose-architecture.jpg",
         "images": [
           "/images/projets/brochetrose-architecture/065_brochetrose-architecture.jpg",
@@ -396,11 +396,11 @@ export const agences: Agence[] = [
   {
     "slug": "agence-dame",
     "name": "Agence Dame",
-    "blurb": "Architecture residentielle contemporaine en Gironde.",
+    "blurb": "Architecture résidentielle contemporaine en Gironde.",
     "cover": "/images/projets/agence-dame/001_agence-dame.jpg",
     "locations": [
-      "Castres sur Gironde",
-      "Saint Émilion",
+      "Castres-sur-Gironde",
+      "Saint-Émilion",
       "Bordeaux"
     ],
     "yearStart": 2025,
@@ -413,7 +413,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Février 2025 a Bordeaux pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Février 2025 à Bordeaux pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/agence-dame/001_agence-dame.jpg",
         "images": [
           "/images/projets/agence-dame/001_agence-dame.jpg",
@@ -433,10 +433,10 @@ export const agences: Agence[] = [
       {
         "slug": "castres-sur-gironde-juillet-2025",
         "title": "Castres-sur-Gironde — Juillet 2025",
-        "location": "Castres sur Gironde",
+        "location": "Castres-sur-Gironde",
         "locationSlug": "castres-sur-gironde",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Juillet 2025 a Castres-sur-Gironde pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juillet 2025 à Castres-sur-Gironde pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/agence-dame/012_agence-dame.jpg",
         "images": [
           "/images/projets/agence-dame/012_agence-dame.jpg",
@@ -472,11 +472,11 @@ export const agences: Agence[] = [
       },
       {
         "slug": "saint-emilion-juillet-2025",
-        "title": "Saint-Emilion — Juillet 2025",
-        "location": "Saint Émilion",
+        "title": "Saint-Émilion — Juillet 2025",
+        "location": "Saint-Émilion",
         "locationSlug": "saint-emilion",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Juillet 2025 a Saint-Emilion pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juillet 2025 à Saint-Émilion pour l'agence Agence Dame. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/agence-dame/040_agence-dame.jpg",
         "images": [
           "/images/projets/agence-dame/040_agence-dame.jpg",
@@ -523,7 +523,7 @@ export const agences: Agence[] = [
   {
     "slug": "florentine-du-chazaud",
     "name": "Florentine du Chazaud",
-    "blurb": "Architecture d'interieur, projets residentiels et lieux d'exception.",
+    "blurb": "Architecture d'intérieur, projets résidentiels et lieux d'exception.",
     "cover": "/images/projets/florentine-du-chazaud/3774561766215576925_3774561756971295449.jpg",
     "locations": [
       "Bordeaux"
@@ -538,7 +538,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2024,
-        "description": "Reportage photographique d'un chantier livre en Octobre 2024 a Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Octobre 2024 à Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/florentine-du-chazaud/001_florentine-du-chazaud.jpg",
         "images": [
           "/images/projets/florentine-du-chazaud/001_florentine-du-chazaud.jpg",
@@ -556,7 +556,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Juin 2025 a Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juin 2025 à Bordeaux pour l'agence Florentine du Chazaud. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/florentine-du-chazaud/007_florentine-du-chazaud.jpg",
         "images": [
           "/images/projets/florentine-du-chazaud/007_florentine-du-chazaud.jpg",
@@ -612,7 +612,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Avril 2025 a Bordeaux pour l'agence DGOT. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Avril 2025 à Bordeaux pour l'agence DGOT. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/dgot/001_dgot.jpg",
         "images": [
           "/images/projets/dgot/001_dgot.jpg",
@@ -633,7 +633,7 @@ export const agences: Agence[] = [
         "location": "Bordeaux",
         "locationSlug": "bordeaux",
         "year": 2025,
-        "description": "Reportage photographique d'un chantier livre en Juillet 2025 a Bordeaux pour l'agence DGOT. Une lecture sensible du projet, du chantier livre au detail.",
+        "description": "Reportage photographique d'un chantier livré en Juillet 2025 à Bordeaux pour l'agence DGOT. Une lecture sensible du projet, du chantier livré au détail.",
         "cover": "/images/projets/dgot/010_dgot.jpg",
         "images": [
           "/images/projets/dgot/010_dgot.jpg",
@@ -655,10 +655,10 @@ export const agences: Agence[] = [
 export const carnetVoyage: CarnetVoyage | null = {
   "slug": "carnet-de-voyage",
   "title": "Carnet de voyage",
-  "blurb": "Notes visuelles, voyages personnels — quand l'oeil ne travaille pas pour les autres.",
+  "blurb": "Notes visuelles, voyages personnels — quand l'œil ne travaille pas pour les autres.",
   "locations": [
     "Pouilles, Italie",
-    "Chateaux de la Loire"
+    "Châteaux de la Loire"
   ],
   "yearStart": 2024,
   "yearEnd": 2025,
@@ -707,7 +707,7 @@ export const carnetVoyage: CarnetVoyage | null = {
     },
     {
       "slug": "chateaux-de-la-loire",
-      "location": "Chateaux de la Loire",
+      "location": "Châteaux de la Loire",
       "date": "2024-06-18",
       "year": 2024,
       "postCount": 3,
@@ -739,7 +739,7 @@ export const heroCandidates: string[] = [
 
 export const allLocations: string[] = [
   "Bordeaux",
-  "Cap Ferret",
-  "Castres sur Gironde",
-  "Saint Émilion"
+  "Cap-Ferret",
+  "Castres-sur-Gironde",
+  "Saint-Émilion"
 ];

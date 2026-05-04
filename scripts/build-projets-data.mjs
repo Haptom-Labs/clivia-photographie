@@ -26,19 +26,19 @@ const AGENCES = {
     slug: "agence-dame",
     physicalSlug: "agence-dame",
     name: "Agence Dame",
-    blurb: "Architecture residentielle contemporaine en Gironde.",
+    blurb: "Architecture résidentielle contemporaine en Gironde.",
   },
   brochetrose_architecture: {
     slug: "brochet-rose",
     physicalSlug: "brochetrose-architecture",
     name: "Brochet Rose",
-    blurb: "Maisons et residences singulieres, de Saint-Emilion au Cap-Ferret.",
+    blurb: "Maisons et résidences singulières, de Saint-Émilion au Cap-Ferret.",
   },
   "florentine.du.chazaud": {
     slug: "florentine-du-chazaud",
     physicalSlug: "florentine-du-chazaud",
     name: "Florentine du Chazaud",
-    blurb: "Architecture d'interieur, projets residentiels et lieux d'exception.",
+    blurb: "Architecture d'intérieur, projets résidentiels et lieux d'exception.",
   },
   dgot_: {
     slug: "dgot",
@@ -61,11 +61,11 @@ const AGENCE_COVER_OVERRIDES = {
 // =====================================================================
 const BROCHETROSE_SUBPROJECTS = {
   "bordeaux-maison-surelevation": {
-    title: "Maison renovee et surelevee",
+    title: "Maison rénovée et surélevée",
     location: "Bordeaux",
     year: 2024,
     description:
-      "Rehabilitation contemporaine d'une maison bordelaise. Surelevation et redistribution complete des volumes interieurs, lecture precise des materiaux et de la lumiere.",
+      "Réhabilitation contemporaine d'une maison bordelaise. Surélévation et redistribution complète des volumes intérieurs, lecture précise des matériaux et de la lumière.",
     postIds: [
       "3886533820526917875", "3883987450918136670", "3882191816712028148",
       "3880013525431411120", "3875664688382232427", "3874216656524594607",
@@ -81,11 +81,11 @@ const BROCHETROSE_SUBPROJECTS = {
     ],
   },
   "bordeaux-maison-individuelle": {
-    title: "Maison individuelle renovee",
+    title: "Maison individuelle rénovée",
     location: "Bordeaux",
     year: 2025,
     description:
-      "Renovation d'une maison individuelle a Bordeaux. Volumes recomposes, ouvertures genereuses, attention portee aux finitions et a la lumiere naturelle.",
+      "Rénovation d'une maison individuelle à Bordeaux. Volumes recomposés, ouvertures généreuses, attention portée aux finitions et à la lumière naturelle.",
     postIds: [
       "3811184325593696660", "3808271937194197283", "3803947102796300265",
       "3799610524045149962", "3790897901522951766", "3788726504319132323",
@@ -94,11 +94,11 @@ const BROCHETROSE_SUBPROJECTS = {
     ],
   },
   "cap-ferret-villa": {
-    title: "Villa renovee et etendue",
+    title: "Villa rénovée et étendue",
     location: "Cap Ferret",
     year: 2025,
     description:
-      "Renovation et extension d'une villa au Cap-Ferret, dans le respect du caractere du lieu. Travail sur les vues, les terrasses et les interieurs.",
+      "Rénovation et extension d'une villa au Cap-Ferret, dans le respect du caractère du lieu. Travail sur les vues, les terrasses et les intérieurs.",
     postIds: [
       "3474142509799303890", "3471238794154962796", "3469060226327083199",
       "3466163185448117076", "3464720363805048040", "3463272029496047576",
@@ -109,7 +109,7 @@ const BROCHETROSE_SUBPROJECTS = {
     location: "Bordeaux",
     year: 2025,
     description:
-      "Maison contemporaine en bord de bassin signee Brochet Rose. Reportage sur les volumes, la lumiere, et le rapport au paysage.",
+      "Maison contemporaine en bord de bassin signée Brochet Rose. Reportage sur les volumes, la lumière, et le rapport au paysage.",
     postIds: [
       "3701324683370260585", "3695178486016210774", "3691175727289976462",
       "3687188197888508648", "3683576239587066118", "3682150542255603430",
@@ -117,11 +117,11 @@ const BROCHETROSE_SUBPROJECTS = {
     ],
   },
   "bordeaux-etude-notariale-dgot": {
-    title: "Etude notariale (avec DGOT)",
+    title: "Étude notariale (avec DGOT)",
     location: "Bordeaux",
     year: 2024,
     description:
-      "Renovation d'une etude notariale bordelaise en partenariat avec l'agence DGOT. Espaces de travail, lumiere naturelle, mobilier.",
+      "Rénovation d'une étude notariale bordelaise en partenariat avec l'agence DGOT. Espaces de travail, lumière naturelle, mobilier.",
     partnerAgence: "DGOT",
     postIds: [
       "3772339793725002734", "3769869338954964772", "3768442114469064457",
@@ -129,11 +129,11 @@ const BROCHETROSE_SUBPROJECTS = {
     ],
   },
   "bordeaux-appartement": {
-    title: "Appartement renove",
+    title: "Appartement rénové",
     location: "Bordeaux",
     year: 2024,
     description:
-      "Rehabilitation d'un appartement bordelais. Intervention sobre et precise sur les volumes, la lumiere et les finitions.",
+      "Réhabilitation d'un appartement bordelais. Intervention sobre et précise sur les volumes, la lumière et les finitions.",
     postIds: [
       "3349475440445825508", "3348740761358933923", "3347329315584454439",
     ],
@@ -160,16 +160,16 @@ const LOCATION_SLUG = {
 
 const LOCATION_DISPLAY = {
   "bordeaux": "Bordeaux",
-  "saint-emilion": "Saint-Emilion",
+  "saint-emilion": "Saint-Émilion",
   "castres-sur-gironde": "Castres-sur-Gironde",
-  "cap-ferret": "Cap Ferret",
+  "cap-ferret": "Cap-Ferret",
 };
 
 function fallbackDescription(agenceName, locationDisplay, monthLine) {
   if (monthLine) {
-    return `Reportage photographique d'un chantier livre en ${monthLine} a ${locationDisplay} pour l'agence ${agenceName}. Une lecture sensible du projet, du chantier livre au detail.`;
+    return `Reportage photographique d'un chantier livré en ${monthLine} à ${locationDisplay} pour l'agence ${agenceName}. Une lecture sensible du projet, du chantier livré au détail.`;
   }
-  return `Selection de reportages photographies a ${locationDisplay} pour l'agence ${agenceName}. Une lecture sensible des projets, du chantier livre au detail.`;
+  return `Sélection de reportages photographiés à ${locationDisplay} pour l'agence ${agenceName}. Une lecture sensible des projets, du chantier livré au détail.`;
 }
 
 const stripDiacritics = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -461,18 +461,19 @@ async function main() {
       if (projetData.meta.source === "descriptive") {
         const conf = projetData.meta.conf;
         title = conf.title;
-        location = conf.location;
-        const knownSlug = LOCATION_SLUG[stripDiacritics(location)];
-        locationSlug = knownSlug ?? stripDiacritics(location).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+        const rawLoc = conf.location;
+        const knownSlug = LOCATION_SLUG[stripDiacritics(rawLoc)];
+        locationSlug = knownSlug ?? stripDiacritics(rawLoc).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+        location = LOCATION_DISPLAY[locationSlug] ?? rawLoc;
         description = conf.description;
         partnerAgence = conf.partnerAgence;
       } else {
-        location = projetData.meta.location || "Sans lieu";
+        const rawLoc = projetData.meta.location || "Sans lieu";
         locationSlug = projetData.meta.locationSlug;
-        const locDisplay = LOCATION_DISPLAY[locationSlug] ?? location;
+        location = LOCATION_DISPLAY[locationSlug] ?? rawLoc;
         const monthLine = projetData.meta.chantierMonth;
-        title = monthLine ? `${locDisplay} — ${monthLine}` : `Selection ${locDisplay}`;
-        description = fallbackDescription(agence.name, locDisplay, monthLine);
+        title = monthLine ? `${location} — ${monthLine}` : `Sélection ${location}`;
+        description = fallbackDescription(agence.name, location, monthLine);
       }
 
       const years = sortedPosts.map((p) => p.year).filter(Boolean);
@@ -501,8 +502,13 @@ async function main() {
     }
 
     const allYears = agence.postsAll.map((p) => p.year).filter(Boolean);
+    // Locations canoniques (avec accents/tirets) via LOCATION_DISPLAY
     const allLocations = [
-      ...new Set(agence.postsAll.map((p) => p.lieu_raw).filter(Boolean)),
+      ...new Set(
+        agence.postsAll
+          .map((p) => LOCATION_DISPLAY[p.lieu_slug] ?? p.lieu_raw)
+          .filter(Boolean),
+      ),
     ];
     const totalImages = projects.reduce((s, p) => s + p.imageCount, 0);
     const allImagesFlat = projects.flatMap((p) => p.images);
@@ -529,7 +535,7 @@ async function main() {
 
   const VOYAGE_LABELS = {
     "italie-pouilles": "Pouilles, Italie",
-    "chateaux-de-la-loire": "Chateaux de la Loire",
+    "chateaux-de-la-loire": "Châteaux de la Loire",
   };
   const voyageBySlug = new Map();
   for (const p of voyagePosts) {
@@ -584,7 +590,7 @@ async function main() {
         slug: "carnet-de-voyage",
         title: "Carnet de voyage",
         blurb:
-          "Notes visuelles, voyages personnels — quand l'oeil ne travaille pas pour les autres.",
+          "Notes visuelles, voyages personnels — quand l'œil ne travaille pas pour les autres.",
         locations: voyageSeries.map((s) => s.location),
         yearStart: Math.min(...voyageYears),
         yearEnd: Math.max(...voyageYears),
