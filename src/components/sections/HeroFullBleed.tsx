@@ -101,16 +101,16 @@ export default function HeroFullBleed({
         )}
         <h1
           ref={titleRef}
-          className={`mt-5 font-display leading-[0.95] tracking-[-0.018em] ${
+          className={`mt-5 font-display leading-[1.05] tracking-[-0.018em] ${
             titleSize === "compact"
               ? "text-[clamp(2.6rem,11vw,4.4rem)] md:text-[clamp(3.4rem,7vw,7rem)]"
-              : "text-[clamp(3.6rem,18vw,5.4rem)] md:text-[clamp(4.5rem,10vw,9.5rem)] leading-[0.9]"
+              : "text-[clamp(3.6rem,18vw,5.4rem)] md:text-[clamp(4.5rem,10vw,9.5rem)] leading-[1]"
           }`}
         >
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden pb-[0.18em]">
             <span className="js-hero-line block">{titleTop}</span>
           </span>
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden pb-[0.18em]">
             <span className="js-hero-line block italic font-light">
               {titleBottom}
             </span>

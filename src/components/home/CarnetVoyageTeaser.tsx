@@ -103,12 +103,12 @@ export default function CarnetVoyageTeaser({
             <p className="eyebrow mb-4">— Hors commande</p>
             <h2
               ref={titleRef}
-              className="font-display text-[clamp(2.6rem,9vw,5rem)] leading-[0.96] tracking-[-0.015em] md:text-[clamp(3.2rem,5.6vw,5.6rem)]"
+              className="font-display text-[clamp(2.6rem,9vw,5rem)] leading-[1.04] tracking-[-0.015em] md:text-[clamp(3.2rem,5.6vw,5.6rem)]"
             >
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.18em]">
                 <span className="js-line block">Quand l'œil prend</span>
               </span>
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.18em]">
                 <span className="js-line block italic font-light">
                   des vacances.
                 </span>
@@ -154,7 +154,7 @@ export default function CarnetVoyageTeaser({
               >
                 Personnel
               </p>
-              <h3 className="mt-2 font-display text-[2rem] leading-[0.98] md:text-[clamp(2rem,2.8vw,3rem)]">
+              <h3 className="mt-2 font-display text-[2rem] leading-[1.05] md:text-[clamp(2rem,2.8vw,3rem)]">
                 Carnet de voyage
               </h3>
             </div>
