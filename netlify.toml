@@ -5,6 +5,55 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# === Redirects 301 — anciennes routes /projets/[slug]/ vers nouveaux hubs agences ===
+[[redirects]]
+  from = "/projets/agence-dame"
+  to = "/agences/agence-dame"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/agence-dame/*"
+  to = "/agences/agence-dame"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/brochetrose-architecture"
+  to = "/agences/brochet-rose"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/brochetrose-architecture/*"
+  to = "/agences/brochet-rose"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/florentine-du-chazaud"
+  to = "/agences/florentine-du-chazaud"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/florentine-du-chazaud/*"
+  to = "/agences/florentine-du-chazaud"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/dgot"
+  to = "/agences/dgot"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projets/dgot/*"
+  to = "/agences/dgot"
+  status = 301
+  force = true
+
 # Cache long terme pour les assets buildés (hashés)
 [[headers]]
   for = "/_astro/*"

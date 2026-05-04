@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import HeroFullBleed from "../../../components/sections/HeroFullBleed.tsx";
+import LookbookSection from "../../../components/projet/LookbookSection.astro";
+import { agences } from "../../../data/projets";
+
+export function getStaticPaths() {
+  return agences.flatMap((a) =>
+    a.projects.map((p) => ({
+      params: { slug: a.slug, project: p.slug },
+      props: { agence: a, projet: p },
+    })),
+  );
+}
+
+const { agence, projet } = Astro.props;
+
+// Cross-nav : projet precedent/suivant dans la MEME agence (cyclique)
+const idx = agence.projects.findIndex((p) => p.slug === projet.slug);
+const nextProjet = agence.projects[(idx + 1) % agence.projects.length];
+const prevProjet = agence.projects[(idx - 1 + agence.projects.length) % agence.projects.length];
+
+// Autre agence cyclique
+const agIdx = agences.findIndex((a) => a.slug === agence.slug);
+const otherAgence = agences[(agIdx + 1) % agences.length];
+
+// Build synthetic SerieProjet pour LookbookSection (qui attend { location, title?, year, date, images, postCount })
+const seriesProp = {
+  location: projet.location,
+  title: projet.title,
+  year: projet.year,
+  date: "",
+  images: projet.images,
+  postCount: projet.imageCount,
+};
+
+const heroImage = projet.images[1] ?? projet.cover;
+const titleParts = projet.title.split(/\s+/);
+const titleTop = titleParts[0];
+const titleBottom = titleParts.slice(1).join(" ") || "";
+---
+
+<BaseLayout
+  title={`${projet.title} — ${agence.name} · Clivia Ambroise`}
+  description={projet.description}
+  ogImage={projet.cover}
+>
+  <HeroFullBleed
+    client:load
+    image={heroImage}
+    alt={`${projet.title} — ${projet.location}`}
+    eyebrow={`— ${agence.name}`}
+    titleTop={titleTop}
+    titleBottom={titleBottom}
+    subtitle={`${projet.location}${projet.year ? ` · ${projet.year}` : ""}`}
+    height="tall"
+    titleSize="compact"
+  />
+
+  <section class="bg-[var(--color-bg)] px-6 py-8 md:px-10 md:py-14">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-8 md:grid-cols-12 md:gap-10">
+      <div class="md:col-span-3">
+        <p class="eyebrow">— Reportage</p>
+      </div>
+      <div class="md:col-span-9 grid gap-10 md:grid-cols-3">
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Agence</p>
+          <a
+            href={`/agences/${agence.slug}`}
+            class="mt-2 inline-block font-display text-2xl underline-offset-4 transition-colors hover:text-[var(--color-accent)] hover:underline"
+          >
+            {agence.name}
+          </a>
+          {projet.partnerAgence && (
+            <p class="mt-2 text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
+              Avec {projet.partnerAgence}
+            </p>
+          )}
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Lieu</p>
+          <p class="mt-2 font-display text-2xl">{projet.location}</p>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Année</p>
+          <p class="mt-2 font-display text-2xl">{projet.year ?? "—"}</p>
+          <p class="mt-1 text-sm text-[var(--color-mute)]">{projet.imageCount} photographies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-bg)] px-6 pb-8 md:px-10 md:pb-12">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-8 md:grid-cols-12 md:gap-10">
+      <div class="md:col-span-3">
+        <p class="eyebrow">— À propos</p>
+      </div>
+      <div class="md:col-span-9">
+        <p class="font-display text-xl leading-[1.4] tracking-[-0.005em] text-[var(--color-ink-soft)] md:text-2xl md:leading-[1.45]">
+          {projet.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <LookbookSection series={seriesProp} index={0} client={agence.name} />
+
+  <section class="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-bg)]">
+    <img
+      src={nextProjet.cover}
+      alt=""
+      loading="lazy"
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
+    />
+    <a
+      href={`/agences/${agence.slug}/${nextProjet.slug}`}
+      data-cursor="link"
+      class="block px-6 py-20 md:px-10 md:py-48"
+    >
+      <div class="mx-auto max-w-[var(--container-wide)]">
+        <p class="eyebrow opacity-70" style="color: var(--color-bg);">
+          Projet suivant — {agence.name}
+        </p>
+        <h2 class="mt-6 font-display text-5xl leading-[1.04] md:text-[clamp(3rem,7vw,7rem)]">
+          {nextProjet.title} <span class="italic font-light">→</span>
+        </h2>
+        <p class="mt-6 text-sm opacity-70">
+          {nextProjet.location}{nextProjet.year ? ` · ${nextProjet.year}` : ""} · {nextProjet.imageCount} photographies
+        </p>
+      </div>
+    </a>
+  </section>
+
+  <section class="bg-[var(--color-bg)] px-6 py-8 md:px-10 md:py-12">
+    <div class="mx-auto flex max-w-[var(--container-wide)] flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <a
+        href={`/agences/${agence.slug}/${prevProjet.slug}`}
+        class="text-sm tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
+      >
+        ← {prevProjet.title}
+      </a>
+      <a
+        href={`/agences/${agence.slug}`}
+        class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)] transition-colors hover:text-[var(--color-ink)]"
+      >
+        Tous les projets de {agence.name}
+      </a>
+      <a
+        href={`/agences/${otherAgence.slug}`}
+        class="text-sm tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
+      >
+        Voir {otherAgence.name} →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroFullBleed from "../../components/sections/HeroFullBleed.tsx";
+import { agences } from "../../data/projets";
+
+export function getStaticPaths() {
+  return agences.map((a) => ({ params: { slug: a.slug }, props: { agence: a } }));
+}
+
+const { agence } = Astro.props;
+const others = agences.filter((a) => a.slug !== agence.slug);
+const yearRange =
+  agence.yearStart === agence.yearEnd
+    ? `${agence.yearStart}`
+    : `${agence.yearStart} – ${agence.yearEnd}`;
+
+const heroImage = agence.cover || agence.projects[0]?.cover || "";
+const nameParts = agence.name.split(" ");
+const titleTop = nameParts[0];
+const titleBottom = nameParts.slice(1).join(" ") || "";
+---
+
+<BaseLayout
+  title={`${agence.name} — Reportages photo · Clivia Ambroise`}
+  description={`${agence.blurb} ${agence.projects.length} projets photographiés, ${agence.imageCountTotal} images.`}
+  ogImage={heroImage}
+>
+  <HeroFullBleed
+    client:load
+    image={heroImage}
+    alt={`Photographies pour ${agence.name}`}
+    eyebrow="— Agence d'architecture"
+    titleTop={titleTop}
+    titleBottom={titleBottom}
+    subtitle={agence.blurb}
+    height="tall"
+  />
+
+  <section class="bg-[var(--color-bg)] px-6 py-8 md:px-10 md:py-14">
+    <div class="mx-auto grid max-w-[var(--container-wide)] gap-8 md:grid-cols-12 md:gap-10">
+      <div class="md:col-span-3">
+        <p class="eyebrow">— Studio</p>
+      </div>
+      <div class="md:col-span-9 grid gap-10 md:grid-cols-3">
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Projets</p>
+          <p class="mt-2 font-display text-2xl">{agence.projects.length}</p>
+          <p class="mt-1 text-sm text-[var(--color-mute)]">{agence.imageCountTotal} photographies</p>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Lieux</p>
+          <ul class="mt-2 flex flex-col gap-1 font-display text-2xl">
+            {agence.locations.map((l) => <li>{l}</li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Période</p>
+          <p class="mt-2 font-display text-2xl">{yearRange}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-bg)] px-6 pb-16 md:px-10 md:pb-32">
+    <div class="mx-auto max-w-[var(--container-wide)]">
+      <div class="mb-10 grid gap-6 md:mb-16 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-4">
+          <p class="eyebrow mb-4">— Projets</p>
+          <h2 class="font-display text-3xl leading-[1.06] md:text-[clamp(2rem,3.4vw,3.4rem)]">
+            Les <span class="italic font-light">interventions</span> de {agence.name}.
+          </h2>
+        </div>
+        <div class="md:col-span-7 md:col-start-6">
+          <p class="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+            Chaque projet est documenté en plusieurs reportages — du chantier livré aux détails.
+            Cliquez sur un projet pour entrer dans la série complète.
+          </p>
+        </div>
+      </div>
+
+      <ul class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-8 md:gap-y-12">
+        {agence.projects.map((p, i) => (
+          <li>
+            <a
+              href={`/agences/${agence.slug}/${p.slug}`}
+              data-cursor="link"
+              class="group block"
+            >
+              <div class="relative aspect-[4/5] overflow-hidden bg-[var(--color-ink)]">
+                <img
+                  src={p.cover}
+                  alt={`${p.title} — ${p.location}`}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[rgba(14,14,12,0.62)] via-[rgba(14,14,12,0.18)] to-transparent" />
+                <span class="absolute top-5 left-5 z-10 font-display text-[0.7rem] tracking-[0.22em] uppercase opacity-80 md:top-7 md:left-7" style="color: var(--color-bg);">
+                  — {String(i + 1).padStart(2, "0")}
+                </span>
+                <div class="absolute inset-x-0 bottom-0 z-10 p-6 text-[var(--color-bg)] md:p-8">
+                  <p class="text-[0.66rem] tracking-[0.22em] uppercase opacity-85" style="color: var(--color-bg);">
+                    {p.location}{p.year ? ` · ${p.year}` : ""}
+                  </p>
+                  <h3 class="mt-3 font-display text-2xl leading-[1.04] transition-colors group-hover:text-[var(--color-accent)] md:text-3xl">
+                    {p.title}
+                  </h3>
+                  <p class="mt-3 text-[0.7rem] tracking-[0.2em] uppercase opacity-70">
+                    {p.imageCount} photographies
+                  </p>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-bg-warm)] px-6 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[var(--container-wide)]">
+      <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="eyebrow mb-3">— Autres agences</p>
+          <h2 class="font-display text-3xl leading-[1.06] md:text-4xl">
+            Voir d'autres <span class="italic font-light">signatures</span>.
+          </h2>
+        </div>
+        <a
+          href="/projets"
+          class="border-b border-[var(--color-ink)] pb-1 text-xs tracking-[0.22em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+          data-cursor="link"
+        >
+          Tous les projets →
+        </a>
+      </div>
+      <ul class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        {others.map((a) => (
+          <li>
+            <a href={`/agences/${a.slug}`} data-cursor="link" class="group block">
+              <div class="relative aspect-[4/5] overflow-hidden bg-[var(--color-ink)]">
+                <img
+                  src={a.cover}
+                  alt={a.name}
+                  loading="lazy"
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[rgba(14,14,12,0.62)] via-[rgba(14,14,12,0.18)] to-transparent" />
+                <div class="absolute inset-x-0 bottom-0 p-5 text-[var(--color-bg)]">
+                  <p class="text-[0.66rem] tracking-[0.22em] uppercase opacity-85" style="color: var(--color-bg);">
+                    {a.locations.slice(0, 2).join(" · ")}
+                  </p>
+                  <h3 class="mt-2 font-display text-xl leading-[1.04] transition-colors group-hover:text-[var(--color-accent)] md:text-2xl">
+                    {a.name}
+                  </h3>
+                  <p class="mt-2 text-[0.7rem] tracking-[0.2em] uppercase opacity-70">
+                    {a.projects.length} projets · {a.imageCountTotal} photos
+                  </p>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

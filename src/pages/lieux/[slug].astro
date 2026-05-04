@@ -1,22 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeroFullBleed from "../../components/sections/HeroFullBleed.tsx";
-import {
-  buildLocationCards,
-  projetsByLocationSlug,
-  seriesForLocation,
-} from "../../lib/locations";
+import { buildLocationCards, projetsByLocationSlug } from "../../lib/locations";
 
 export function getStaticPaths() {
   const cards = buildLocationCards();
   return cards.map((card) => ({
     params: { slug: card.slug },
-    props: { card, projets: projetsByLocationSlug(card.slug) },
+    props: { card, items: projetsByLocationSlug(card.slug) },
   }));
 }
 
-const { card, projets } = Astro.props;
-const totalPhotos = projets.reduce((sum, p) => sum + p.imageCount, 0);
+const { card, items } = Astro.props;
+const totalPhotos = items.reduce((sum, x) => sum + x.projet.imageCount, 0);
+const agencesUniques = new Set(items.map((x) => x.agence.slug)).size;
 const titleParts = card.name.split(/[\s-]+/);
 const titleTop = titleParts[0];
 const titleBottom = titleParts.slice(1).join(" ") || titleParts[0];
@@ -24,7 +21,7 @@ const titleBottom = titleParts.slice(1).join(" ") || titleParts[0];
 
 <BaseLayout
   title={`${card.name} — Reportages photo · Clivia Ambroise`}
-  description={`Photographies d'architecture sur ${card.name}. ${projets.length} projets, ${totalPhotos} photographies.`}
+  description={`Photographies d'architecture sur ${card.name}. ${items.length} projets, ${totalPhotos} photographies.`}
   ogImage={card.image}
 >
   <HeroFullBleed
@@ -34,7 +31,7 @@ const titleBottom = titleParts.slice(1).join(" ") || titleParts[0];
     eyebrow="— Lieu"
     titleTop={titleTop}
     titleBottom={titleParts.length > 1 ? titleBottom : ""}
-    subtitle={`${projets.length} ${projets.length > 1 ? "agences confiées" : "agence confiée"} · ${totalPhotos} photographies`}
+    subtitle={`${items.length} ${items.length > 1 ? "projets" : "projet"} · ${agencesUniques} ${agencesUniques > 1 ? "agences" : "agence"} · ${totalPhotos} photographies`}
     height="tall"
   />
 
@@ -60,42 +57,36 @@ const titleBottom = titleParts.slice(1).join(" ") || titleParts[0];
   <section class="bg-[var(--color-bg)] px-6 pt-4 pb-24 md:px-10 md:pt-8 md:pb-32">
     <div class="mx-auto max-w-[var(--container-wide)]">
       <ul class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-        {projets.map((p) => {
-          const localSeries = seriesForLocation(p, card.slug);
-          const localCount = localSeries.reduce((sum, s) => sum + s.images.length, 0);
-          const cover = localSeries[0]?.images[0] ?? p.cover;
-
-          return (
-            <li>
-              <a
-                href={`/projets/${p.slug}`}
-                data-cursor="link"
-                class="group block"
-              >
-                <div class="relative aspect-[4/5] overflow-hidden bg-[var(--color-ink)]">
-                  <img
-                    src={cover}
-                    alt={`${p.title} — ${card.name}`}
-                    loading="lazy"
-                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[rgba(14,14,12,0.62)] via-[rgba(14,14,12,0.18)] to-transparent" />
-                  <div class="absolute inset-x-0 bottom-0 p-6 text-[var(--color-bg)] md:p-8">
-                    <p class="text-[0.66rem] tracking-[0.22em] uppercase opacity-85">
-                      {p.client}
-                    </p>
-                    <h3 class="mt-3 font-display text-2xl leading-[1.04] transition-colors group-hover:text-[var(--color-accent)] md:text-3xl">
-                      {p.title}
-                    </h3>
-                    <p class="mt-3 text-[0.7rem] tracking-[0.2em] uppercase opacity-70">
-                      {localCount} photographies
-                    </p>
-                  </div>
+        {items.map(({ projet, agence }) => (
+          <li>
+            <a
+              href={`/agences/${agence.slug}/${projet.slug}`}
+              data-cursor="link"
+              class="group block"
+            >
+              <div class="relative aspect-[4/5] overflow-hidden bg-[var(--color-ink)]">
+                <img
+                  src={projet.cover}
+                  alt={`${projet.title} — ${card.name}`}
+                  loading="lazy"
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[rgba(14,14,12,0.62)] via-[rgba(14,14,12,0.18)] to-transparent" />
+                <div class="absolute inset-x-0 bottom-0 p-6 text-[var(--color-bg)] md:p-8">
+                  <p class="text-[0.66rem] tracking-[0.22em] uppercase opacity-85" style="color: var(--color-bg);">
+                    {agence.name}{projet.year ? ` · ${projet.year}` : ""}
+                  </p>
+                  <h3 class="mt-3 font-display text-2xl leading-[1.04] transition-colors group-hover:text-[var(--color-accent)] md:text-3xl">
+                    {projet.title}
+                  </h3>
+                  <p class="mt-3 text-[0.7rem] tracking-[0.2em] uppercase opacity-70">
+                    {projet.imageCount} photographies
+                  </p>
                 </div>
-              </a>
-            </li>
-          );
-        })}
+              </div>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   </section>

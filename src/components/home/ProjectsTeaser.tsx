@@ -1,15 +1,15 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import type { Projet } from "../../data/projets";
+import type { Agence } from "../../data/projets";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
-  projets: Projet[];
+  agences: Agence[];
 }
 
-export default function ProjectsTeaser({ projets }: Props) {
+export default function ProjectsTeaser({ agences }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,9 +17,6 @@ export default function ProjectsTeaser({ projets }: Props) {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const cards = ref.current?.querySelectorAll<HTMLAnchorElement>("[data-card]");
       cards?.forEach((card, idx) => {
-        // Apparition: card cachée AU MOUNT (immediateRender true, défaut), tween dès qu'elle entre dans le viewport.
-        // start "top bottom-=80" = déclenche AVANT qu'elle soit visible à l'œil → pas de flash possible.
-        // once:true = pas de re-trigger au scroll up/down (évite les sauts).
         gsap.from(card, {
           y: 60,
           opacity: 0,
@@ -53,7 +50,7 @@ export default function ProjectsTeaser({ projets }: Props) {
           <div>
             <p className="eyebrow mb-3">Sélection</p>
             <h2 className="font-display text-4xl leading-[1.05] tracking-tight md:text-[clamp(2.6rem,5vw,5rem)]">
-              Quatre projets, une <span className="italic font-light">écriture</span>.
+              Quatre architectes, plusieurs <span className="italic font-light">projets</span>.
             </h2>
           </div>
           <a
@@ -68,37 +65,33 @@ export default function ProjectsTeaser({ projets }: Props) {
         <div ref={ref} className="grid grid-cols-2 gap-3 md:grid-cols-12 md:gap-x-8 md:gap-y-6">
           {(() => {
             const DISPLAY_ORDER = [
-              "brochetrose-architecture",
+              "brochet-rose",
               "dgot",
               "florentine-du-chazaud",
               "agence-dame",
             ];
             const ordered = DISPLAY_ORDER
-              .map((slug) => projets.find((p) => p.slug === slug))
-              .filter((p): p is Projet => Boolean(p));
+              .map((slug) => agences.find((a) => a.slug === slug))
+              .filter((a): a is Agence => Boolean(a));
             return ordered;
-          })().map((p, idx) => {
+          })().map((a, idx) => {
             const layouts = [
               {
-                // Card 1 (Agence Dame): mobile = pleine largeur portrait, desktop = grande verticale gauche
                 desktop: "col-span-2 md:col-span-7 md:row-span-2",
                 aspect: "aspect-[4/5] md:aspect-[3/5]",
                 translate: "",
               },
               {
-                // Card 2 (DGOT): mobile = demi-largeur portrait, desktop = haut-droite
                 desktop: "col-span-1 md:col-span-5",
                 aspect: "aspect-[3/4] md:aspect-[4/5]",
                 translate: "md:translate-y-8",
               },
               {
-                // Card 3 (Florentine): mobile = demi-largeur portrait, desktop = bas-droite
                 desktop: "col-span-1 md:col-span-5",
                 aspect: "aspect-[3/4] md:aspect-[1/1]",
                 translate: "",
               },
               {
-                // Card 4 (Brochet Rose): mobile = bannière landscape pleine largeur, desktop = bannière 21/9
                 desktop: "col-span-2 md:col-span-12",
                 aspect: "aspect-[16/10] md:aspect-[21/9]",
                 translate: "md:min-h-[480px]",
@@ -109,15 +102,15 @@ export default function ProjectsTeaser({ projets }: Props) {
 
             return (
               <a
-                key={p.slug}
-                href={`/projets/${p.slug}`}
+                key={a.slug}
+                href={`/agences/${a.slug}`}
                 data-card
                 data-cursor="link"
                 className={`group relative block overflow-hidden bg-[var(--color-ink)] ${cfg.desktop} ${cfg.aspect} ${cfg.translate}`}
               >
                 <img
-                  src={p.cover}
-                  alt={`${p.title} — ${p.locations.join(", ")}`}
+                  src={a.cover}
+                  alt={`${a.name} — ${a.locations.join(", ")}`}
                   loading="eager"
                   decoding="async"
                   fetchPriority={idx === 0 ? "high" : "auto"}
@@ -138,10 +131,10 @@ export default function ProjectsTeaser({ projets }: Props) {
                     className="text-[0.66rem] tracking-[0.22em] uppercase opacity-85"
                     style={{ color: "var(--color-bg)" }}
                   >
-                    {p.locations.slice(0, 2).join(" · ")}
+                    {a.locations.slice(0, 2).join(" · ")} · {a.projects.length} projets
                   </p>
                   <h3 className="mt-3 font-display text-[1.9rem] leading-[1.02] tracking-[-0.005em] transition-colors group-hover:text-[var(--color-accent)] md:mt-4 md:text-[clamp(1.7rem,2.4vw,2.6rem)]">
-                    {p.title}
+                    {a.name}
                   </h3>
                 </div>
               </a>

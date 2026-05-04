@@ -1,4 +1,4 @@
-import { projets, type Projet } from "../data/projets";
+import { agences, type Agence, type ProjetIndividuel } from "../data/projets";
 
 export interface LocationCard {
   name: string;
@@ -8,10 +8,16 @@ export interface LocationCard {
   projects: string[];
 }
 
+export interface ProjetWithAgence {
+  projet: ProjetIndividuel;
+  agence: Agence;
+}
+
 const SLUG_BY_NAME: Record<string, string> = {
   Bordeaux: "bordeaux",
   "Saint Émilion": "saint-emilion",
   "Saint-Émilion": "saint-emilion",
+  "Saint Emilion": "saint-emilion",
   "Castres sur Gironde": "castres-sur-gironde",
   "Cap Ferret": "cap-ferret",
   "Ostuni, Pouilles, Italie": "italie-pouilles",
@@ -30,23 +36,27 @@ const DISPLAY_BY_SLUG: Record<string, string> = {
   "chateaux-de-la-loire": "Châteaux de la Loire",
 };
 
+function locationSlug(p: ProjetIndividuel): string {
+  return p.locationSlug || SLUG_BY_NAME[p.location] || p.location.toLowerCase().replace(/\s+/g, "-");
+}
+
 export function buildLocationCards(): LocationCard[] {
   const map = new Map<string, LocationCard>();
 
-  for (const p of projets) {
-    for (const serie of p.series) {
-      const key = SLUG_BY_NAME[serie.location] ?? serie.slug;
+  for (const a of agences) {
+    for (const p of a.projects) {
+      const key = locationSlug(p);
       if (!map.has(key)) {
         map.set(key, {
-          name: DISPLAY_BY_SLUG[key] ?? serie.location,
+          name: DISPLAY_BY_SLUG[key] ?? p.location,
           slug: key,
-          image: serie.images[0],
+          image: p.images[0] ?? p.cover,
           count: 0,
           projects: [],
         });
       }
       const card = map.get(key)!;
-      card.count += serie.postCount;
+      card.count += p.imageCount;
       if (!card.projects.includes(p.title)) card.projects.push(p.title);
     }
   }
@@ -54,12 +64,18 @@ export function buildLocationCards(): LocationCard[] {
   return [...map.values()].sort((a, b) => b.count - a.count);
 }
 
-export function projetsByLocationSlug(slug: string): Projet[] {
-  return projets.filter((p) =>
-    p.series.some((s) => (SLUG_BY_NAME[s.location] ?? s.slug) === slug),
-  );
+export function projetsByLocationSlug(slug: string): ProjetWithAgence[] {
+  const out: ProjetWithAgence[] = [];
+  for (const a of agences) {
+    for (const p of a.projects) {
+      if (locationSlug(p) === slug) {
+        out.push({ projet: p, agence: a });
+      }
+    }
+  }
+  return out;
 }
 
-export function seriesForLocation(p: Projet, slug: string) {
-  return p.series.filter((s) => (SLUG_BY_NAME[s.location] ?? s.slug) === slug);
+export function allProjects(): ProjetWithAgence[] {
+  return agences.flatMap((a) => a.projects.map((p) => ({ projet: p, agence: a })));
 }

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SplitScreen from "../components/sections/SplitScreen.astro";
 import ParallaxImage from "../components/sections/ParallaxImage.tsx";
-import { projets } from "../data/projets";
+import { agences } from "../data/projets";
 
 // Images "À propos" — choisies manuellement (changer ici pour swap rapide)
 const portrait = "/images/intro/agence-dame-mirror.jpg";
@@ -75,16 +75,16 @@ const editoImage = "/images/projets/florentine-du-chazaud/010_florentine-du-chaz
         </h2>
       </div>
       <ul class="md:col-span-8 grid grid-cols-1 gap-0 md:grid-cols-2">
-        {projets.map((p) => (
+        {agences.map((a) => (
           <li class="border-t border-[var(--color-line)] py-8">
             <a
-              href={`/projets/${p.slug}`}
+              href={`/agences/${a.slug}`}
               data-cursor="link"
               class="block transition-colors hover:text-[var(--color-accent)]"
             >
-              <p class="font-display text-2xl md:text-3xl">{p.title}</p>
+              <p class="font-display text-2xl md:text-3xl">{a.name}</p>
               <p class="mt-5 text-xs tracking-[0.2em] uppercase text-[var(--color-mute)]">
-                {p.locations.join(" · ")}
+                {a.locations.join(" · ")} · {a.projects.length} projets
               </p>
             </a>
           </li>

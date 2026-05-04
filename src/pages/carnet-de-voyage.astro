@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroFullBleed from "../components/sections/HeroFullBleed.tsx";
 import LookbookSection from "../components/projet/LookbookSection.astro";
-import { carnetVoyage, projets } from "../data/projets";
+import { carnetVoyage, agences } from "../data/projets";
 
 if (!carnetVoyage) {
   return Astro.redirect("/");
@@ -13,7 +13,7 @@ const yearRange =
   carnetVoyage.yearStart === carnetVoyage.yearEnd
     ? `${carnetVoyage.yearStart}`
     : `${carnetVoyage.yearStart} – ${carnetVoyage.yearEnd}`;
-const next = projets[0];
+const nextAgence = agences[0];
 ---
 
 <BaseLayout
@@ -67,13 +67,13 @@ const next = projets[0];
     class="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-bg)]"
   >
     <img
-      src={next.cover}
+      src={nextAgence.cover}
       alt=""
       loading="lazy"
       class="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
     />
     <a
-      href={`/projets/${next.slug}`}
+      href={`/agences/${nextAgence.slug}`}
       data-cursor="link"
       class="block px-6 py-20 md:px-10 md:py-48"
     >
@@ -82,9 +82,9 @@ const next = projets[0];
           Retour au travail
         </p>
         <h2 class="mt-6 font-display text-5xl leading-[1.04] md:text-[clamp(3rem,7vw,7rem)]">
-          {next.title} <span class="italic font-light">→</span>
+          {nextAgence.name} <span class="italic font-light">→</span>
         </h2>
-        <p class="mt-6 text-sm opacity-70">{next.locations.join(" · ")}</p>
+        <p class="mt-6 text-sm opacity-70">{nextAgence.locations.join(" · ")}</p>
       </div>
     </a>
   </section>

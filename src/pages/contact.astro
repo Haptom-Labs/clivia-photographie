@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { projets } from "../data/projets";
+import { agences } from "../data/projets";
 
-const heroImage =
-  projets[2]?.images[3] ?? projets[0]?.images[1] ?? projets[0]?.cover;
+const allImages = agences.flatMap((a) => a.projects.flatMap((p) => p.images));
+const heroImage = allImages[80] ?? allImages[1] ?? agences[0]?.cover;
 ---
 
 <BaseLayout
