@@ -2,51 +2,53 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[var(--color-line)] bg-[var(--color-bg)] px-6 py-12 md:px-10 md:py-16">
-  <div class="mx-auto grid max-w-[var(--container-wide)] gap-8 md:grid-cols-12 md:gap-12">
+<footer class="bg-[var(--color-ink)] text-[var(--color-bg)] px-6 py-14 md:px-10 md:py-20">
+  <div class="mx-auto grid max-w-[var(--container-wide)] gap-10 md:grid-cols-12 md:gap-12">
     <div class="md:col-span-5">
-      <p class="eyebrow mb-3">Photographe d'architecture</p>
-      <h3 class="font-display text-3xl md:text-5xl">Travaillons ensemble.</h3>
+      <p class="eyebrow mb-3 opacity-70" style="color: var(--color-bg);">Photographe d'architecture</p>
+      <h3 class="font-display text-3xl md:text-5xl leading-[1.04]">
+        Travaillons <span class="italic font-light">ensemble.</span>
+      </h3>
       <a
         href="mailto:contact@cliviaambroise.com"
-        class="mt-6 inline-block border-b border-[var(--color-ink)] pb-1 text-sm font-medium tracking-[0.18em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+        class="mt-6 inline-block border-b border-[var(--color-bg)] pb-1 text-sm font-medium tracking-[0.18em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
       >
         contact@cliviaambroise.com
       </a>
     </div>
 
     <div class="md:col-span-3">
-      <p class="eyebrow mb-3">Studio</p>
-      <p class="text-sm leading-relaxed text-[var(--color-ink-soft)]">
+      <p class="eyebrow mb-3 opacity-70" style="color: var(--color-bg);">Studio</p>
+      <p class="text-sm leading-relaxed opacity-80">
         Bordeaux<br />
         Gironde, France
       </p>
     </div>
 
     <div class="md:col-span-2">
-      <p class="eyebrow mb-3">Suivre</p>
+      <p class="eyebrow mb-3 opacity-70" style="color: var(--color-bg);">Suivre</p>
       <a
         href="https://www.instagram.com/cliviaambroise_photographie/"
         target="_blank"
         rel="noopener"
-        class="text-sm transition-colors hover:text-[var(--color-accent)]"
+        class="text-sm opacity-80 transition-colors hover:text-[var(--color-accent)] hover:opacity-100"
       >
         Instagram
       </a>
     </div>
 
     <div class="md:col-span-2">
-      <p class="eyebrow mb-3">Navigation</p>
+      <p class="eyebrow mb-3 opacity-70" style="color: var(--color-bg);">Navigation</p>
       <nav class="flex flex-col gap-2 text-sm">
-        <a href="/projets" class="hover:text-[var(--color-accent)]">Projets</a>
-        <a href="/carnet-de-voyage" class="hover:text-[var(--color-accent)]">Carnet de voyage</a>
-        <a href="/a-propos" class="hover:text-[var(--color-accent)]">À propos</a>
-        <a href="/contact" class="hover:text-[var(--color-accent)]">Contact</a>
+        <a href="/projets" class="opacity-80 transition-colors hover:text-[var(--color-accent)] hover:opacity-100">Projets</a>
+        <a href="/carnet-de-voyage" class="opacity-80 transition-colors hover:text-[var(--color-accent)] hover:opacity-100">Carnet de voyage</a>
+        <a href="/a-propos" class="opacity-80 transition-colors hover:text-[var(--color-accent)] hover:opacity-100">À propos</a>
+        <a href="/contact" class="opacity-80 transition-colors hover:text-[var(--color-accent)] hover:opacity-100">Contact</a>
       </nav>
     </div>
   </div>
 
-  <div class="mx-auto mt-10 flex max-w-[var(--container-wide)] flex-col gap-2 border-t border-[var(--color-line)] pt-4 text-xs text-[var(--color-mute)] md:mt-16 md:pt-6 md:flex-row md:items-center md:justify-between">
+  <div class="mx-auto mt-12 flex max-w-[var(--container-wide)] flex-col gap-2 border-t border-[var(--color-bg)]/20 pt-6 text-xs opacity-60 md:mt-20 md:flex-row md:items-center md:justify-between">
     <p>© {year} Clivia Ambroise — Tous droits réservés</p>
     <p class="font-display italic tracking-tight">— L'architecture racontée par la lumière.</p>
   </div>

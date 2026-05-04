@@ -10,10 +10,9 @@ const heroImage =
   title="Contact — Clivia Ambroise"
   description="Photographe d'architecture indépendante. Bordeaux et déplacements. Devis sur mesure."
   ogImage={heroImage}
-  hideFooter={true}
 >
-  <section class="grid min-h-[100svh] grid-cols-1 md:grid-cols-12">
-    <div class="relative md:col-span-7">
+  <section class="grid grid-cols-1 md:grid-cols-12">
+    <div class="relative md:col-span-6 md:sticky md:top-0 md:h-[100svh]">
       <img
         src={heroImage}
         alt="Photographie d'architecture par Clivia Ambroise"
@@ -21,53 +20,291 @@ const heroImage =
       />
     </div>
 
-    <div class="md:col-span-5 flex flex-col justify-between bg-[var(--color-bg)] px-6 py-12 md:px-12 md:py-24">
-      <div>
+    <div class="md:col-span-6 flex flex-col bg-[var(--color-bg)] px-6 py-14 md:px-12 md:py-24">
+      <div class="max-w-xl">
         <p class="eyebrow mb-6">— Contact</p>
         <h1 class="font-display text-4xl leading-[1.04] md:text-[clamp(2.6rem,4.4vw,4.8rem)]">
           Travaillons<br />
           <span class="italic font-light">ensemble.</span>
         </h1>
-        <p class="mt-8 max-w-md text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
-          Reportages d'architecture, intérieurs, lieux d'exception. Bordeaux et déplacements
-          en France ou à l'étranger. Devis sur mesure selon le projet.
+        <p class="mt-8 text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+          Reportages d'architecture, intérieurs et lieux d'exception. Bordeaux et
+          déplacements en France ou à l'étranger. Devis sur mesure selon le projet,
+          la livraison souhaitée et les usages prévus (presse, web, books, communication
+          d'agence).
         </p>
       </div>
 
-      <div class="mt-10 flex flex-col gap-6 md:mt-16 md:gap-8">
+      <!-- Coordonnées directes -->
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:mt-14">
         <div>
-          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Email</p>
+          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Email direct</p>
           <a
             href="mailto:contact@cliviaambroise.com"
             data-cursor="link"
-            class="mt-2 inline-block font-display text-2xl transition-colors hover:text-[var(--color-accent)]"
+            class="mt-2 inline-block font-display text-xl transition-colors hover:text-[var(--color-accent)] md:text-2xl"
           >
             contact@cliviaambroise.com
           </a>
         </div>
-
         <div>
           <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Studio</p>
-          <p class="mt-2 font-display text-2xl">Bordeaux, Gironde</p>
-          <p class="mt-1 text-sm text-[var(--color-mute)]">France</p>
-        </div>
-
-        <div>
-          <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">Suivre</p>
-          <a
-            href="https://www.instagram.com/cliviaambroise_photographie/"
-            target="_blank"
-            rel="noopener"
-            data-cursor="link"
-            class="mt-2 inline-block font-display text-2xl transition-colors hover:text-[var(--color-accent)]"
-          >
-            @cliviaambroise_photographie
-          </a>
+          <p class="mt-2 font-display text-xl md:text-2xl">Bordeaux, Gironde</p>
+          <p class="mt-1 text-sm text-[var(--color-mute)]">France · déplacements</p>
         </div>
       </div>
 
-      <div class="mt-10 border-t border-[var(--color-line)] pt-4 text-xs text-[var(--color-mute)] md:mt-16 md:pt-6">
-        <p>© {new Date().getFullYear()} Clivia Ambroise — Tous droits réservés</p>
+      <!-- Formulaire intelligent -->
+      <div class="mt-16 md:mt-20">
+        <p class="eyebrow mb-5">— Brief reportage</p>
+        <h2 class="font-display text-2xl leading-[1.1] md:text-3xl">
+          Quelques infos<br />
+          <span class="italic font-light">pour un devis précis.</span>
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+          Plus le brief est complet, plus le devis sera juste — et la session
+          tournée vers ce qui compte vraiment pour votre projet.
+        </p>
+
+        <form
+          name="contact"
+          method="POST"
+          action="/merci"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="mt-10 flex flex-col gap-7"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden">
+            <label>Ne pas remplir : <input name="bot-field" /></label>
+          </p>
+
+          <!-- Type de demande -->
+          <div>
+            <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="purpose">
+              Nature de la demande
+            </label>
+            <select
+              id="purpose"
+              name="purpose"
+              required
+              class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+            >
+              <option value="">— Sélectionnez —</option>
+              <option value="reportage-projet-livre">Reportage d'un projet livré</option>
+              <option value="reportage-chantier">Reportage de chantier ou d'avancement</option>
+              <option value="devis-portfolio">Constituer un portfolio d'agence</option>
+              <option value="presse">Demande presse</option>
+              <option value="collaboration">Collaboration / partenariat</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+
+          <!-- Statut -->
+          <div>
+            <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="role">
+              Vous êtes
+            </label>
+            <select
+              id="role"
+              name="role"
+              required
+              class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+            >
+              <option value="">— Sélectionnez —</option>
+              <option value="architecte">Architecte</option>
+              <option value="architecte-interieur">Architecte d'intérieur</option>
+              <option value="maitre-oeuvre">Maître d'œuvre / bureau d'études</option>
+              <option value="promoteur">Promoteur / foncière</option>
+              <option value="hotelier">Hôtelier / lieu d'exception</option>
+              <option value="presse-media">Presse / média</option>
+              <option value="particulier">Propriétaire particulier</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+
+          <!-- Identité (2 cols) -->
+          <div class="grid grid-cols-1 gap-7 sm:grid-cols-2">
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="name">
+                Nom · Prénom
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+              />
+            </div>
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="company">
+                Agence / société (si applicable)
+              </label>
+              <input
+                id="company"
+                name="company"
+                type="text"
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+              />
+            </div>
+          </div>
+
+          <!-- Email + tel -->
+          <div class="grid grid-cols-1 gap-7 sm:grid-cols-2">
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="email">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+              />
+            </div>
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="phone">
+                Téléphone (optionnel)
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+              />
+            </div>
+          </div>
+
+          <!-- Type de projet -->
+          <div>
+            <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="project-type">
+              Type de projet
+            </label>
+            <select
+              id="project-type"
+              name="project-type"
+              class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)]"
+            >
+              <option value="">— À préciser —</option>
+              <option value="maison-individuelle">Maison individuelle</option>
+              <option value="appartement">Appartement / loft</option>
+              <option value="villa">Villa / résidence secondaire</option>
+              <option value="immeuble">Immeuble / collectif résidentiel</option>
+              <option value="hotel-restaurant">Hôtel / restaurant</option>
+              <option value="bureau">Bureaux / espace de travail</option>
+              <option value="boutique">Boutique / retail</option>
+              <option value="lieu-culturel">Lieu culturel / patrimoine</option>
+              <option value="exterieur-paysage">Extérieur / paysage / piscine</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+
+          <!-- Lieu + surface + date -->
+          <div class="grid grid-cols-1 gap-7 sm:grid-cols-3">
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="location">
+                Lieu
+              </label>
+              <input
+                id="location"
+                name="location"
+                type="text"
+                placeholder="Bordeaux, Cap-Ferret…"
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)] placeholder:text-[var(--color-mute)] placeholder:opacity-60"
+              />
+            </div>
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="surface">
+                Surface approx. (m²)
+              </label>
+              <input
+                id="surface"
+                name="surface"
+                type="text"
+                placeholder="120, 250…"
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)] placeholder:text-[var(--color-mute)] placeholder:opacity-60"
+              />
+            </div>
+            <div>
+              <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="timing">
+                Date souhaitée
+              </label>
+              <input
+                id="timing"
+                name="timing"
+                type="text"
+                placeholder="Été 2026, Q3…"
+                class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-lg outline-none transition-colors focus:border-[var(--color-ink)] placeholder:text-[var(--color-mute)] placeholder:opacity-60"
+              />
+            </div>
+          </div>
+
+          <!-- Usages prévus (checkboxes) -->
+          <div>
+            <p class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]">
+              Usages prévus des images
+            </p>
+            <div class="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="checkbox" name="usage" value="presse" class="h-4 w-4 accent-[var(--color-ink)]" />
+                <span>Presse</span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="checkbox" name="usage" value="site-web" class="h-4 w-4 accent-[var(--color-ink)]" />
+                <span>Site web</span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="checkbox" name="usage" value="book-agence" class="h-4 w-4 accent-[var(--color-ink)]" />
+                <span>Book / portfolio</span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="checkbox" name="usage" value="reseaux-sociaux" class="h-4 w-4 accent-[var(--color-ink)]" />
+                <span>Réseaux sociaux</span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="checkbox" name="usage" value="impression" class="h-4 w-4 accent-[var(--color-ink)]" />
+                <span>Impression / expo</span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="checkbox" name="usage" value="commercial" class="h-4 w-4 accent-[var(--color-ink)]" />
+                <span>Communication client</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Message libre -->
+          <div>
+            <label class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)]" for="message">
+              Brief libre
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              placeholder="Le projet, son histoire, ce qui compte pour vous, ce qui doit absolument être photographié…"
+              class="mt-3 w-full border-b border-[var(--color-line)] bg-transparent py-3 font-display text-base leading-relaxed outline-none transition-colors focus:border-[var(--color-ink)] placeholder:text-[var(--color-mute)] placeholder:opacity-60"
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="mt-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <p class="text-xs leading-relaxed text-[var(--color-mute)]">
+              Réponse sous 48h ouvrées.<br />
+              Vos infos restent confidentielles, jamais transmises.
+            </p>
+            <button
+              type="submit"
+              data-cursor="link"
+              class="inline-flex items-center gap-3 self-start bg-[var(--color-ink)] px-8 py-4 text-xs font-medium tracking-[0.22em] uppercase text-[var(--color-bg)] transition-opacity hover:opacity-85 md:self-auto"
+            >
+              Envoyer le brief
+              <span class="font-display italic">→</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </section>

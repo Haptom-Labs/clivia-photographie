@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Merci — Clivia Ambroise"
+  description="Votre brief a bien été envoyé."
+>
+  <section class="flex min-h-[80svh] items-center justify-center bg-[var(--color-bg)] px-6 py-24 md:px-10 md:py-32">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow mb-6">— Bien reçu</p>
+      <h1 class="font-display text-4xl leading-[1.04] md:text-[clamp(3rem,5.5vw,5.6rem)]">
+        Merci pour<br />
+        <span class="italic font-light">votre brief.</span>
+      </h1>
+      <p class="mt-8 text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+        Je reviens vers vous sous 48h ouvrées avec un devis précis et quelques
+        questions pour préparer la session. À très bientôt.
+      </p>
+      <div class="mt-12 flex flex-col items-center gap-4 md:flex-row md:justify-center md:gap-8">
+        <a
+          href="/projets"
+          class="border-b border-[var(--color-ink)] pb-1 text-xs tracking-[0.22em] uppercase transition-colors hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]"
+          data-cursor="link"
+        >
+          Voir les projets →
+        </a>
+        <a
+          href="/"
+          class="text-xs tracking-[0.22em] uppercase text-[var(--color-mute)] transition-colors hover:text-[var(--color-ink)]"
+          data-cursor="link"
+        >
+          Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
