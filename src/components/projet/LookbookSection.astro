@@ -100,7 +100,7 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
       ];
       const r = ratios[idx % ratios.length];
       return (
-        <div class={`mb-2 break-inside-avoid relative overflow-hidden bg-[var(--color-ink)] ${r}`}>
+        <div class={`reveal-mobile mb-2 break-inside-avoid relative overflow-hidden bg-[var(--color-ink)] ${r}`}>
           <img
             src={src}
             alt={`${series.title ?? series.location} ${idx + 1}`}
