@@ -41,25 +41,25 @@ export default function ImageReveal({
       if (!wrapRef.current || !imgRef.current) return;
 
       gsap.set(wrapRef.current, { clipPath: startClip });
-      gsap.set(imgRef.current, { scale: 1.18 });
+      gsap.set(imgRef.current, { scale: 1.06 });
 
       gsap.to(wrapRef.current, {
         clipPath: "inset(0% 0% 0% 0% round 0px)",
-        duration: 1.4,
-        ease: "expo.out",
+        duration: 1.6,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: wrapRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none",
         },
       });
       gsap.to(imgRef.current, {
         scale: 1,
-        duration: 1.6,
-        ease: "expo.out",
+        duration: 1.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: wrapRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none",
         },
       });

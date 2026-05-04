@@ -85,7 +85,36 @@ const sectionId = `serie-${series.location.toLowerCase().replace(/[^a-z0-9]+/g, 
     </div>
   </header>
 
-  <div class="flex flex-col gap-6 md:gap-20">
+  <!-- Mobile: feed Pinterest masonry (column-based, hauteurs aléatoires) -->
+  <div class="md:hidden columns-2 gap-2 px-2">
+    {imgs.map((src, idx) => {
+      const ratios = [
+        "aspect-[4/5]",
+        "aspect-[3/4]",
+        "aspect-[1/1]",
+        "aspect-[5/4]",
+        "aspect-[4/5]",
+        "aspect-[3/4]",
+        "aspect-[2/3]",
+        "aspect-[1/1]",
+      ];
+      const r = ratios[idx % ratios.length];
+      return (
+        <div class={`mb-2 break-inside-avoid relative overflow-hidden bg-[var(--color-ink)] ${r}`}>
+          <img
+            src={src}
+            alt={`${series.title ?? series.location} ${idx + 1}`}
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Desktop: blocs cinématiques -->
+  <div class="hidden md:flex md:flex-col md:gap-20">
     {blocks.map((b, idx) => {
       if (b.kind === "fullbleed") {
         return (
